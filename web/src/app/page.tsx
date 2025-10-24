@@ -60,7 +60,7 @@ function AgencyHero() {
           src="/School_Entrance_Cinematic_Video.mp4"
           type="video/mp4"
         />
-        Your browser does not support the video tag.
+        Tu navegador no soporta la etiqueta de video.
       </video>
 
       {/* Header */}
@@ -70,7 +70,7 @@ function AgencyHero() {
       <div className="relative z-10 max-w-7xl mx-auto xl:px-0 px-5">
         <HeroSection timelineRef={heroRef} revealVariants={revealVariants} />
 
-        <div className="grid lg:grid-cols-2 gap-12 items-end">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-end mt-8 lg:mt-6">
           {/* Left Content */}
           <HeroContent timelineRef={heroRef} revealVariants={revealVariants} />
 

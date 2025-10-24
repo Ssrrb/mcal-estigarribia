@@ -26,7 +26,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ timelineRef, revealVariants }: HeroSectionProps) {
   return (
-    <article className="max-w-2xl text-white space-y-4 pt-14">
+        <article className="max-w-2xl text-white space-y-4 pt-14 lg:pt-8">
       {/* Metric Badge */}
       <TimelineContent
         as="div"
@@ -40,7 +40,7 @@ export function HeroSection({ timelineRef, revealVariants }: HeroSectionProps) {
           <span className="relative inline-flex size-4 rounded-full bg-blue-600"></span>
         </span>
         <span className="sm:text-lg text-sm">
-          Educando desde 1946
+          Colegio Nacional EMD Mcal. Estigarribia
         </span>
       </TimelineContent>
 
@@ -59,7 +59,7 @@ export function HeroSection({ timelineRef, revealVariants }: HeroSectionProps) {
             delay: 0.8,
           }}
         >
-          Design built to drive revenue, earn trust and raise rounds.
+          Al servicio de la educación carapegueña desde 1929
         </VerticalCutReveal>
       </h1>
     </article>

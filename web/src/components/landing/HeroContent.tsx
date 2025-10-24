@@ -49,7 +49,7 @@ export function HeroContent({ timelineRef, revealVariants }: HeroContentProps) {
         customVariants={revealVariants}
         className="bg-white text-black px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-100 transition-colors duration-200 shadow-lg"
       >
-        Book your free strategy call
+        Averiguar más
       </TimelineContent>
     </div>
   );

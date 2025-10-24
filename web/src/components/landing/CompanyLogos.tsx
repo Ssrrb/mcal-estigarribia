@@ -38,8 +38,8 @@ export function CompanyLogos({
     >
       <div className="flex flex-wrap items-center justify-between gap-8">
         <div className="flex items-center space-x-2">
-          <span className="text-lg">5.0</span>
-          <span className="">rating on Clutch</span>
+          <span className="text-lg">4.5</span>
+          <span className="">en Google Maps</span>
           <div className="flex space-x-1">
             {[...Array(5)].map((_, i) => (
               <div key={i} className="w-4 h-4 bg-yellow-400 rounded-sm"></div>
