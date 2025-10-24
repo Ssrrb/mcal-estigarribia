@@ -1,45 +1,32 @@
 "use client";
 
 import { TimelineContent } from "@/components/ui/timeline-animation";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { cn } from "@/lib/utils";
 import { AlignJustify, Send, X } from "lucide-react";
-import Image from "next/image";
-import { RefObject, useState } from "react";
 import { Drawer } from "vaul";
-import { mobileNavigationLinks, navigationLinks } from "./constants";
-
+import type { Variants } from "motion/react";
+import { CSSProperties, RefObject, useState } from "react";
+import constants from "constants";
 interface HeaderProps {
   timelineRef: RefObject<HTMLDivElement>;
-  revealVariants: {
-    visible: (i: number) => {
-      y: number;
-      opacity: number;
-      filter: string;
-      transition: {
-        delay: number;
-        duration: number;
-      };
-    };
-    hidden: {
-      filter: string;
-      y: number;
-      opacity: number;
-    };
-  };
+  revealVariants: Variants;
 }
+
+const NAV_ITEMS = [
+  "Nosotros",
+  "Academico",
+  "Autoridades",
+  "Destacados",
+  "Contacto",
+];
 
 export function Header({ timelineRef, revealVariants }: HeaderProps) {
   const isMobile = useMediaQuery("(max-width: 992px)");
   const [isOpen, setIsOpen] = useState(false);
+
+  const drawerStyle = {
+    "--initial-transform": "calc(100% + 8px)",
+  } as CSSProperties;
 
   return (
     <TimelineContent
@@ -47,75 +34,35 @@ export function Header({ timelineRef, revealVariants }: HeaderProps) {
       animationNum={0}
       timelineRef={timelineRef}
       customVariants={revealVariants}
-      className="relative z-50 xl:px-0 px-5 py-6 max-w-7xl mx-auto"
+      className="relative z-10 xl:px-0 px-5 py-4 max-w-7xl mx-auto"
     >
       {!isMobile ? (
         <nav className="flex items-center justify-between">
           <div className="flex gap-10 items-center">
-            <Image
+            <img
               src="/logo-mcalesti.svg"
-              alt="Municipal College Logo"
-              width={120}
-              height={80}
-              className="h-12 w-auto"
+              alt="Logo"
+              className="w-28 h-auto sm:w-32 md:w-36 lg:w-40 xl:w-44"
             />
-            <NavigationMenu className="hidden md:flex" viewport={false}>
-              <NavigationMenuList>
-                {navigationLinks.map((link) => (
-                  <NavigationMenuItem key={link.id}>
-                    {link.items ? (
-                      <>
-                        <NavigationMenuTrigger className="text-gray-50 hover:text-white hover:bg-white/10 data-[state=open]:bg-white/10 data-[state=open]:text-white backdrop-blur-lg bg-transparent border-none shadow-none h-10">
-                          {link.label}
-                        </NavigationMenuTrigger>
-                        <NavigationMenuContent className="bg-black/95 backdrop-blur-xl border border-white/20 shadow-2xl shadow-black/50">
-                          <ul className="grid w-[400px] gap-2 p-4 md:w-[500px] md:grid-cols-2">
-                            {link.items.map((item) => (
-                              <li key={item.href}>
-                                <NavigationMenuLink asChild>
-                                  <a
-                                    href={item.href}
-                                    className={cn(
-                                      "block select-none space-y-1.5 rounded-lg p-3 leading-none no-underline outline-none transition-all duration-200",
-                                      "hover:bg-white/15 hover:text-white focus:bg-white/15 focus:text-white text-gray-100",
-                                      "border border-transparent hover:border-white/10"
-                                    )}
-                                  >
-                                    <div className="text-sm font-semibold leading-none">
-                                      {item.title}
-                                    </div>
-                                    {item.description && (
-                                      <p className="line-clamp-2 text-xs leading-snug text-gray-400">
-                                        {item.description}
-                                      </p>
-                                    )}
-                                  </a>
-                                </NavigationMenuLink>
-                              </li>
-                            ))}
-                          </ul>
-                        </NavigationMenuContent>
-                      </>
-                    ) : (
-                      <NavigationMenuLink
-                        href={link.href}
-                        className="text-gray-50 hover:text-white hover:bg-white/10 backdrop-blur-lg px-4 py-2 inline-flex items-center h-10 rounded-lg transition-colors duration-200 bg-transparent border-none shadow-none"
-                      >
-                        {link.label}
-                      </NavigationMenuLink>
-                    )}
-                  </NavigationMenuItem>
-                ))}
-              </NavigationMenuList>
-            </NavigationMenu>
+            <div className="hidden md:flex items-center space-x-8">
+              {NAV_ITEMS.map((item) => (
+                <a
+                  key={item}
+                  href="#"
+                  className="text-gray-50 hover:text-white hover:bg-white/10 backdrop-blur-lg p-1 px-2 inline-block rounded-lg transition-colors duration-200"
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
           </div>
 
           <div className="flex items-center space-x-4">
             <div className="bg-blue-500 p-2 text-white rounded-full">
               <Send className="w-5 h-5" />
             </div>
-            <button className="bg-linear-to-t from-blue-500 to-blue-600 text-white backdrop-blur-sm border border-blue-500 shadow-md shadow-blue-600 px-6 py-2 rounded-full hover:bg-blue-600 transition-all duration-200">
-              Llamar
+            <button className="bg-gradient-to-t from-blue-500 to-blue-600 text-white backdrop-blur-sm border border-blue-500 shadow-md shadow-blue-600 px-6 py-2 rounded-full hover:bg-blue-600 transition-all duration-200">
+              Book a call
             </button>
           </div>
         </nav>
@@ -128,74 +75,37 @@ export function Header({ timelineRef, revealVariants }: HeaderProps) {
             <Drawer.Overlay className="fixed inset-0 bg-black/40 z-50" />
             <Drawer.Content
               className="left-2 top-2 bottom-2 fixed z-50 outline-none w-72 flex"
-              style={
-                {
-                  "--initial-transform": "calc(100% + 8px)",
-                } as React.CSSProperties
-              }
+              style={drawerStyle}
             >
-              <div className="bg-linear-to-t from-black via-neutral-800 to-neutral-950 border border-neutral-700 text-white p-2 h-full w-full grow flex flex-col rounded-2xl">
-                <Drawer.Title className="sr-only">
-                  Menú de navegación
-                </Drawer.Title>
+              <div className="bg-gradient-to-t from-black via-neutral-800 to-neutral-950 border border-neutral-700 text-white p-2 h-full w-full grow flex flex-col rounded-[16px]">
                 <div className="w-full flex justify-between">
-                  <div className="flex gap-2 px-4 shrink-0 items-center">
-                    <Image
-                      src="/logo-mcalesti.svg"
-                      alt="Municipal College Logo"
-                      width={100}
-                      height={60}
-                      className="h-10 w-auto"
-                    />
+                  <div className="flex gap-2 px-4 flex-shrink-0 items-center text-2xl font-semibold">
+                    <span>UI-Layouts</span>
                   </div>
                   <button
-                    className="rounded-md w-fit bg-neutral-800 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-neutral-800 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+                    className="rounded-md w-fit bg-neutral-800 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
                     onClick={() => setIsOpen(false)}
                   >
                     <X />
                   </button>
                 </div>
-                <div className="rounded-b-md py-2 px-3 overflow-y-auto">
-                  <ul className="space-y-1">
-                    {mobileNavigationLinks.map((link) => (
-                      <li key={link.id}>
-                        {link.items ? (
-                          <div className="space-y-1">
-                            <div className="text-gray-50 font-semibold p-2 px-3">
-                              {link.label}
-                            </div>
-                            <ul className="ml-2 space-y-1">
-                              {link.items.map((item) => (
-                                <li
-                                  key={item.href}
-                                  className="hover:bg-neutral-800 cursor-pointer p-1.5 px-3 rounded-md"
-                                >
-                                  <a
-                                    href={item.href}
-                                    className="text-gray-300 text-sm"
-                                  >
-                                    {item.title}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ) : (
-                          <div className="hover:bg-neutral-800 cursor-pointer p-2 px-3 rounded-md">
-                            <a href={link.href} className="text-gray-50">
-                              {link.label}
-                            </a>
-                          </div>
-                        )}
+                <div className="rounded-b-md py-2 px-3">
+                  <ul className="space-y-2">
+                    {NAV_ITEMS.map((item) => (
+                      <li
+                        key={item}
+                        className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md"
+                      >
+                        {item}
                       </li>
                     ))}
                   </ul>
-                  <div className="flex items-center space-x-4 pt-4 mt-4 border-t border-neutral-700">
+                  <div className="flex items-center space-x-4 pt-4">
                     <div className="bg-blue-500 p-2 text-white rounded-full">
                       <Send className="w-5 h-5" />
                     </div>
-                    <button className="bg-linear-to-t from-blue-500 to-blue-600 text-white backdrop-blur-sm border border-blue-500 shadow-md shadow-blue-600 px-6 py-2 rounded-full hover:bg-blue-600 transition-all duration-200">
-                      Llamar
+                    <button className="bg-gradient-to-t from-blue-500 to-blue-600 text-white backdrop-blur-sm border border-blue-500 shadow-md shadow-blue-600 px-6 py-2 rounded-full hover:bg-blue-600 transition-all duration-200">
+                      Book a call
                     </button>
                   </div>
                 </div>

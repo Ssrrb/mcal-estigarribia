@@ -1,6 +1,7 @@
 "use client";
 
 import { TimelineContent } from "@/components/ui/timeline-animation";
+import Image from "next/image";
 import { RefObject } from "react";
 import { companyLogos } from "./constants";
 
@@ -46,10 +47,15 @@ export function CompanyLogos({
             ))}
           </div>
         </div>
-
         {companyLogos.map((company) => (
-          <div key={company.id} className="text-lg font-semibold">
-            {company.name}
+          <div key={company.id} className="relative">
+            <Image
+              src={company.src}
+              alt={company.name}
+              width={company.width}
+              height={company.height}
+              className="object-contain filter brightness-0 invert opacity-70 hover:opacity-100 transition-opacity duration-300"
+            />
           </div>
         ))}
       </div>

@@ -30,118 +30,18 @@ export const people = [
 ];
 
 export const companyLogos = [
-  { id: 1, name: "Nation" },
-  { id: 2, name: "Jumexo" },
-  { id: 3, name: "Revocalize" },
-  { id: 4, name: "NARADA" },
-  { id: 5, name: "AgentBoost" },
-];
-
-export type NavigationLinkItem = {
-  title: string;
-  href: string;
-  description?: string;
-};
-
-export type NavigationLink = {
-  id: number;
-  href: string;
-  label: string;
-  items?: NavigationLinkItem[];
-};
-
-export const navigationLinks: NavigationLink[] = [
   {
     id: 1,
-    href: "#nosotros",
-    label: "Nosotros",
-    items: [
-      { title: "Misión y Visión", href: "#nosotros-mision-vision" },
-      {
-        title: "Historia",
-        href: "/nosotros/historia",
-        description: "Conoce la trayectoria institucional.",
-      },
-      {
-        title: "Valores Institucionales",
-        href: "/nosotros/valores",
-        description: "Principios que guían nuestra comunidad educativa.",
-      },
-    ],
+    name: "Ministerio de Educación y Ciencias",
+    src: "/Logo-mec-py-2.png",
+    width: 200,
+    height: 80,
   },
   {
     id: 2,
-    href: "/academico",
-    label: "Académico",
-    items: [
-      {
-        title: "Educación Escolar Básica - 3° Ciclo",
-        href: "#academico-basica",
-      },
-      {
-        title: "Bachilleratos",
-        href: "#academico-bachilleratos",
-        description: "Opciones formativas para el desarrollo integral.",
-      },
-    ],
+    name: "Gobierno del Paraguay",
+    src: "/Gobierno-Paraguay.png",
+    width: 200,
+    height: 80,
   },
-  { id: 3, href: "/contacto", label: "Contacto" },
-  {
-    id: 4,
-    href: "/autoridades",
-    label: "Autoridades",
-    items: [
-      { title: "Dirección General", href: "#autoridades-direccion" },
-      { title: "Personal Administrativo", href: "#autoridades-administrativo" },
-      { title: "Jefes de Área", href: "#autoridades-jefes-area" },
-      { title: "Centro de Estudiantes", href: "#autoridades-centro-estudiantes" },
-      {
-        title: "Asociación Cooperadora",
-        href: "#autoridades-cooperadora",
-      },
-    ],
-  },
-  { id: 5, href: "/destacados", label: "Destacado" },
-];
-
-export const mobileNavigationLinks: NavigationLink[] = [
-  {
-    id: 1,
-    href: "#nosotros",
-    label: "Nosotros",
-    items: [
-      { title: "Misión y Visión", href: "#nosotros-mision-vision" },
-      {
-        title: "Historia (Reseña histórica)",
-        href: "#nosotros-historia",
-      },
-      { title: "Valores Institucionales", href: "#nosotros-valores" },
-    ],
-  },
-  {
-    id: 2,
-    href: "#academico",
-    label: "Académico",
-    items: [
-      {
-        title: "Educación Escolar Básica - 3° Ciclo",
-        href: "#academico-basica",
-      },
-      { title: "Bachilleratos", href: "#academico-bachilleratos" },
-    ],
-  },
-  { id: 3, href: "#contacto", label: "Contacto" },
-  {
-    id: 4,
-    href: "#autoridades",
-    label: "Autoridades",
-    items: [
-      { title: "Dirección General", href: "#autoridades-direccion" },
-      { title: "Personal Administrativo", href: "#autoridades-administrativo" },
-      { title: "Jefes de Área", href: "#autoridades-jefes-area" },
-      { title: "Centro de Estudiantes", href: "#autoridades-centro-estudiantes" },
-      { title: "Asociación Cooperadora", href: "#autoridades-cooperadora" },
-    ],
-  },
-  { id: 5, href: "#destacado", label: "Destacado" },
 ];

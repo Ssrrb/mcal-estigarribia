@@ -74,7 +74,10 @@ const NeuralNoise = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number | null>(null);
   const glRef = useRef<WebGLRenderingContext | null>(null);
-  const uniformsRef = useRef<Record<string, WebGLUniformLocation | null> | null>(null);
+  const uniformsRef = useRef<Record<
+    string,
+    WebGLUniformLocation | null
+  > | null>(null);
   const pointerRef = useRef({
     x: 0,
     y: 0,
@@ -85,7 +88,7 @@ const NeuralNoise = () => {
   const createShader = (
     gl: WebGLRenderingContext,
     sourceCode: string,
-    type: number
+    type: number,
   ): WebGLShader | null => {
     const shader = gl.createShader(type);
     gl.shaderSource(shader, sourceCode);
@@ -106,7 +109,7 @@ const NeuralNoise = () => {
   const createShaderProgram = (
     gl: WebGLRenderingContext,
     vertexShader: WebGLShader,
-    fragmentShader: WebGLShader
+    fragmentShader: WebGLShader,
   ): WebGLProgram | null => {
     const program = gl.createProgram();
     gl.attachShader(program, vertexShader);
@@ -126,7 +129,7 @@ const NeuralNoise = () => {
 
   const getUniforms = (
     gl: WebGLRenderingContext,
-    program: WebGLProgram
+    program: WebGLProgram,
   ): Record<string, WebGLUniformLocation | null> => {
     const uniforms: Record<string, WebGLUniformLocation | null> = {};
     const uniformCount = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
@@ -152,7 +155,11 @@ const NeuralNoise = () => {
         return null;
       }
 
-      const vertexShader = createShader(gl, vertexShaderSource, gl.VERTEX_SHADER);
+      const vertexShader = createShader(
+        gl,
+        vertexShaderSource,
+        gl.VERTEX_SHADER,
+      );
       const fragmentShader = createShader(
         gl,
         fragmentShaderSource,
@@ -161,7 +168,11 @@ const NeuralNoise = () => {
 
       if (!vertexShader || !fragmentShader) return null;
 
-      const shaderProgram = createShaderProgram(gl, vertexShader, fragmentShader);
+      const shaderProgram = createShaderProgram(
+        gl,
+        vertexShader,
+        fragmentShader,
+      );
       if (!shaderProgram) return null;
 
       uniformsRef.current = getUniforms(gl, shaderProgram);
@@ -174,7 +185,10 @@ const NeuralNoise = () => {
 
       gl.useProgram(shaderProgram);
 
-      const positionLocation = gl.getAttribLocation(shaderProgram, "a_position");
+      const positionLocation = gl.getAttribLocation(
+        shaderProgram,
+        "a_position",
+      );
       gl.enableVertexAttribArray(positionLocation);
 
       gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);

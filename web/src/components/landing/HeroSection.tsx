@@ -26,7 +26,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ timelineRef, revealVariants }: HeroSectionProps) {
   return (
-        <article className="max-w-2xl text-white space-y-4 pt-14 lg:pt-8">
+    <article className="max-w-2xl text-white space-y-4 pt-14 lg:pt-8">
       {/* Metric Badge */}
       <TimelineContent
         as="div"

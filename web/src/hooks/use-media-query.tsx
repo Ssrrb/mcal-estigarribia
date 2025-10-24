@@ -8,6 +8,6 @@ export function useMediaQuery(query: string) {
       return () => media.removeEventListener("change", callback);
     },
     () => window.matchMedia(query).matches,
-    () => false // Server-side snapshot (SSR)
+    () => false, // Server-side snapshot (SSR)
   );
 }

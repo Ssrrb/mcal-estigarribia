@@ -56,10 +56,7 @@ function AgencyHero() {
         playsInline
         className="absolute top-0 left-0 w-full h-full object-cover"
       >
-        <source
-          src="/School_Entrance_Cinematic_Video.mp4"
-          type="video/mp4"
-        />
+        <source src="/School_Entrance_Cinematic_Video.mp4" type="video/mp4" />
         Tu navegador no soporta la etiqueta de video.
       </video>
 
