@@ -315,9 +315,9 @@ function AgencyHero() {
               <div className="p-4 rounded-lg bg-white/10">
                 {/* Testimonial */}
                 <blockquote className="text-white text-sm leading-relaxed">
-                  "In just 6 weeks Nuova transformed our MVP into a modern,
+                  {'"'}In just 6 weeks Nuova transformed our MVP into a modern,
                   intuitive platform with a clear identity helping us attract
-                  the right customers and investors."
+                  the right customers and investors.{'"'}
                 </blockquote>
 
                 {/* Attribution */}

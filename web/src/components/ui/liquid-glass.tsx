@@ -35,7 +35,7 @@ export const LiquidGlassCard = ({
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleToggleExpansion = (e: {
-    target: { closest: (arg0: string) => any };
+    target: { closest: (arg0: string) => Element | null };
   }) => {
     if (!expandable) return;
     // Don't toggle if clicking on interactive elements
