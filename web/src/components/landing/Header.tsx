@@ -1,0 +1,138 @@
+"use client";
+
+import { TimelineContent } from "@/components/ui/timeline-animation";
+import { useMediaQuery } from "@/hooks/use-media-query";
+import { AlignJustify, Send, X } from "lucide-react";
+import Image from "next/image";
+import { RefObject, useState } from "react";
+import { Drawer } from "vaul";
+import { mobileNavigationLinks, navigationLinks } from "./constants";
+
+interface HeaderProps {
+  timelineRef: RefObject<HTMLDivElement>;
+  revealVariants: {
+    visible: (i: number) => {
+      y: number;
+      opacity: number;
+      filter: string;
+      transition: {
+        delay: number;
+        duration: number;
+      };
+    };
+    hidden: {
+      filter: string;
+      y: number;
+      opacity: number;
+    };
+  };
+}
+
+export function Header({ timelineRef, revealVariants }: HeaderProps) {
+  const isMobile = useMediaQuery("(max-width: 992px)");
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <TimelineContent
+      as="header"
+      animationNum={0}
+      timelineRef={timelineRef}
+      customVariants={revealVariants}
+      className="relative z-10 xl:px-0 px-5 py-4 max-w-7xl mx-auto"
+    >
+      {!isMobile ? (
+        <nav className="flex items-center justify-between">
+          <div className="flex gap-10 items-center">
+            <Image
+              src="/logo-mcalesti.svg"
+              alt="Municipal College Logo"
+              width={120}
+              height={80}
+              className="h-12 w-auto"
+            />
+            <div className="hidden md:flex items-center space-x-8">
+              {navigationLinks.map((link) => (
+                <a
+                  key={link.id}
+                  href={link.href}
+                  className="text-gray-50 hover:text-white hover:bg-white/10 backdrop-blur-lg p-1 px-2 inline-block rounded-lg transition-colors duration-200"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex items-center space-x-4">
+            <div className="bg-blue-500 p-2 text-white rounded-full">
+              <Send className="w-5 h-5" />
+            </div>
+            <button className="bg-linear-to-t from-blue-500 to-blue-600 text-white backdrop-blur-sm border border-blue-500 shadow-md shadow-blue-600 px-6 py-2 rounded-full hover:bg-blue-600 transition-all duration-200">
+              Llamar
+            </button>
+          </div>
+        </nav>
+      ) : (
+        <Drawer.Root direction="left" open={isOpen} onOpenChange={setIsOpen}>
+          <Drawer.Trigger className="px-2 text-white h-9 grid place-content-center bg-neutral-800 w-fit rounded-lg">
+            <AlignJustify />
+          </Drawer.Trigger>
+          <Drawer.Portal>
+            <Drawer.Overlay className="fixed inset-0 bg-black/40 z-50" />
+            <Drawer.Content
+              className="left-2 top-2 bottom-2 fixed z-50 outline-none w-72 flex"
+              style={
+                {
+                  "--initial-transform": "calc(100% + 8px)",
+                } as React.CSSProperties
+              }
+            >
+              <div className="bg-linear-to-t from-black via-neutral-800 to-neutral-950 border border-neutral-700 text-white p-2 h-full w-full grow flex flex-col rounded-2xl">
+                <Drawer.Title className="sr-only">
+                  Menú de navegación
+                </Drawer.Title>
+                <div className="w-full flex justify-between">
+                  <div className="flex gap-2 px-4 shrink-0 items-center">
+                    <Image
+                      src="/logo-mcalesti.svg"
+                      alt="Municipal College Logo"
+                      width={100}
+                      height={60}
+                      className="h-10 w-auto"
+                    />
+                  </div>
+                  <button
+                    className="rounded-md w-fit bg-neutral-800 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-neutral-800 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <X />
+                  </button>
+                </div>
+                <div className="rounded-b-md py-2 px-3">
+                  <ul className="space-y-2">
+                    {mobileNavigationLinks.map((link) => (
+                      <li
+                        key={link.id}
+                        className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md"
+                      >
+                        <a href={link.href}>{link.label}</a>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="flex items-center space-x-4 pt-4">
+                    <div className="bg-blue-500 p-2 text-white rounded-full">
+                      <Send className="w-5 h-5" />
+                    </div>
+                    <button className="bg-linear-to-t from-blue-500 to-blue-600 text-white backdrop-blur-sm border border-blue-500 shadow-md shadow-blue-600 px-6 py-2 rounded-full hover:bg-blue-600 transition-all duration-200">
+                      Book a call
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </Drawer.Content>
+          </Drawer.Portal>
+        </Drawer.Root>
+      )}
+    </TimelineContent>
+  );
+}
