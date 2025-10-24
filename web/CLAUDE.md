@@ -10,10 +10,10 @@ This is a Next.js 16 project using React 19, TypeScript, and Tailwind CSS v4. Th
 
 ### Development
 ```bash
-npm run dev      # Start development server at http://localhost:3000
-npm run build    # Build for production
-npm start        # Run production server
-npm run lint     # Run ESLint
+pnpm run dev      # Start development server at http://localhost:3000
+pnpm run build    # Build for production
+pnpm start        # Run production server
+pnpm lint     # Run ESLint
 ```
 
 ## Architecture

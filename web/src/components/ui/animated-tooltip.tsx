@@ -34,15 +34,17 @@ export const AnimatedTooltip = ({
   );
 
   const handleMouseMove = (event: React.MouseEvent<HTMLElement>) => {
+    // Capture values synchronously before requestAnimationFrame
+    const target = event.currentTarget;
+    const halfWidth = target.offsetWidth / 2;
+    const rect = target.getBoundingClientRect();
+    const offsetX = event.clientX - rect.left;
+
     if (animationFrameRef.current) {
       cancelAnimationFrame(animationFrameRef.current);
     }
 
     animationFrameRef.current = requestAnimationFrame(() => {
-      const target = event.currentTarget;
-      const halfWidth = target.offsetWidth / 2;
-      const rect = target.getBoundingClientRect();
-      const offsetX = event.clientX - rect.left;
       x.set(offsetX - halfWidth);
     });
   };
