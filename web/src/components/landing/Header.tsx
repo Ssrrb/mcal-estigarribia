@@ -1,24 +1,21 @@
 "use client";
 
+import Image from "next/image";
+
 import { TimelineContent } from "@/components/ui/timeline-animation";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { AlignJustify, Send, X } from "lucide-react";
 import { Drawer } from "vaul";
 import type { Variants } from "motion/react";
 import { CSSProperties, RefObject, useState } from "react";
-import constants from "constants";
+import { siteNavigationLinks } from "./constants";
 interface HeaderProps {
   timelineRef: RefObject<HTMLDivElement>;
   revealVariants: Variants;
 }
 
-const NAV_ITEMS = [
-  "Nosotros",
-  "Academico",
-  "Autoridades",
-  "Destacados",
-  "Contacto",
-];
+const LOGO_SIZES =
+  "(min-width: 1280px) 9rem, (min-width: 1024px) 8rem, (min-width: 768px) 7rem, (min-width: 640px) 6rem, 5rem";
 
 export function Header({ timelineRef, revealVariants }: HeaderProps) {
   const isMobile = useMediaQuery("(max-width: 992px)");
@@ -39,19 +36,23 @@ export function Header({ timelineRef, revealVariants }: HeaderProps) {
       {!isMobile ? (
         <nav className="flex items-center justify-between">
           <div className="flex gap-10 items-center">
-            <img
+            <Image
               src="/logo-mcalesti.svg"
-              alt="Logo"
-              className="w-28 h-auto sm:w-32 md:w-36 lg:w-40 xl:w-44"
+              alt="Logotipo del Colegio Mariscal Estigarribia"
+              width={655}
+              height={567}
+              priority
+              sizes={LOGO_SIZES}
+              className="w-20 h-auto sm:w-24 md:w-28 lg:w-32 xl:w-36"
             />
             <div className="hidden md:flex items-center space-x-8">
-              {NAV_ITEMS.map((item) => (
+              {siteNavigationLinks.map((link) => (
                 <a
-                  key={item}
-                  href="#"
+                  key={link.href}
+                  href={link.href}
                   className="text-gray-50 hover:text-white hover:bg-white/10 backdrop-blur-lg p-1 px-2 inline-block rounded-lg transition-colors duration-200"
                 >
-                  {item}
+                  {link.label}
                 </a>
               ))}
             </div>
@@ -59,10 +60,9 @@ export function Header({ timelineRef, revealVariants }: HeaderProps) {
 
           <div className="flex items-center space-x-4">
             <div className="bg-blue-500 p-2 text-white rounded-full">
-              <Send className="w-5 h-5" />
             </div>
             <button className="bg-gradient-to-t from-blue-500 to-blue-600 text-white backdrop-blur-sm border border-blue-500 shadow-md shadow-blue-600 px-6 py-2 rounded-full hover:bg-blue-600 transition-all duration-200">
-              Book a call
+              Llamar
             </button>
           </div>
         </nav>
@@ -80,7 +80,14 @@ export function Header({ timelineRef, revealVariants }: HeaderProps) {
               <div className="bg-gradient-to-t from-black via-neutral-800 to-neutral-950 border border-neutral-700 text-white p-2 h-full w-full grow flex flex-col rounded-[16px]">
                 <div className="w-full flex justify-between">
                   <div className="flex gap-2 px-4 flex-shrink-0 items-center text-2xl font-semibold">
-                    <span>UI-Layouts</span>
+                    <Image
+                      src="/logo-mcalesti.svg"
+                      alt="Logotipo del Colegio Mariscal Estigarribia"
+                      width={655}
+                      height={567}
+                      sizes={LOGO_SIZES}
+                      className="w-20 h-auto sm:w-24 md:w-28 lg:w-32 xl:w-36"
+                    />
                   </div>
                   <button
                     className="rounded-md w-fit bg-neutral-800 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
@@ -91,12 +98,14 @@ export function Header({ timelineRef, revealVariants }: HeaderProps) {
                 </div>
                 <div className="rounded-b-md py-2 px-3">
                   <ul className="space-y-2">
-                    {NAV_ITEMS.map((item) => (
+                    {siteNavigationLinks.map((link) => (
                       <li
-                        key={item}
+                        key={link.href}
                         className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md"
                       >
-                        {item}
+                        <a href={link.href} className="block w-full">
+                          {link.label}
+                        </a>
                       </li>
                     ))}
                   </ul>
@@ -105,7 +114,7 @@ export function Header({ timelineRef, revealVariants }: HeaderProps) {
                       <Send className="w-5 h-5" />
                     </div>
                     <button className="bg-gradient-to-t from-blue-500 to-blue-600 text-white backdrop-blur-sm border border-blue-500 shadow-md shadow-blue-600 px-6 py-2 rounded-full hover:bg-blue-600 transition-all duration-200">
-                      Book a call
+                      Llamar
                     </button>
                   </div>
                 </div>

@@ -47,21 +47,19 @@ export function TestimonialCard({
             <AnimatedTooltip items={people} />
           </div>
           <span className="text-white font-medium text-sm">
-            Trusted by 80+ high growth start-ups
+            Confiado y Respaldado por el Gobierno del Paraguay
           </span>
         </div>
 
         <div className="p-4 rounded-lg bg-white/10">
           {/* Testimonial */}
           <blockquote className="text-white text-sm leading-relaxed">
-            {'"'}In just 6 weeks Nuova transformed our MVP into a modern,
-            intuitive platform with a clear identity helping us attract the
-            right customers and investors.{'"'}
+            {'"'}La educación es el arma más poderosa que puedes usar para cambiar el mundo.{'"'}
           </blockquote>
 
           {/* Attribution */}
           <cite className="text-white pt-2 inline-block font-semibold">
-            Naymur Rahman, CEO @ui-layouts
+            Nelson Mandela
           </cite>
         </div>
       </LiquidGlassCard>

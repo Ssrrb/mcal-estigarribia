@@ -1,3 +1,6 @@
+export { siteNavigationLinks } from "@/lib/constant";
+export type { SiteNavigationLink } from "@/lib/constant";
+
 export const people = [
   {
     id: 1,

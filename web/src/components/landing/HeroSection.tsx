@@ -39,9 +39,6 @@ export function HeroSection({ timelineRef, revealVariants }: HeroSectionProps) {
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-500 opacity-75"></span>
           <span className="relative inline-flex size-4 rounded-full bg-blue-600"></span>
         </span>
-        <span className="sm:text-lg text-sm">
-          Colegio Nacional EMD Mcal. Estigarribia
-        </span>
       </TimelineContent>
 
       {/* Main Headline */}

@@ -91,6 +91,8 @@ const NeuralNoise = () => {
     type: number,
   ): WebGLShader | null => {
     const shader = gl.createShader(type);
+    if (!shader) return null;
+
     gl.shaderSource(shader, sourceCode);
     gl.compileShader(shader);
 
@@ -147,8 +149,8 @@ const NeuralNoise = () => {
       const canvas = canvasRef.current;
       if (!canvas) return null;
 
-      const gl =
-        canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+      const gl = (canvas.getContext("webgl") ||
+        canvas.getContext("experimental-webgl")) as WebGLRenderingContext | null;
 
       if (!gl) {
         alert("WebGL is not supported by your browser.");

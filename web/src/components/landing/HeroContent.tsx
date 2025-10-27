@@ -34,10 +34,9 @@ export function HeroContent({ timelineRef, revealVariants }: HeroContentProps) {
         customVariants={revealVariants}
         className="sm:text-xl text-lg text-white leading-relaxed max-w-lg"
       >
-        We turn your vision into a product, site or brand that actually
-        converts,{" "}
+       Colegio Nac. EMD Mariscal. José Félix Estigarribia{" "}
         <span className="text-gray-200">
-          so you grow faster and scale with confidence.
+          Educamos con valores para transformar el futuro de nuestra comunidad.
         </span>
       </TimelineContent>
 
