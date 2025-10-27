@@ -1,10 +1,14 @@
 "use client";
 import { TimelineContent } from "@/components/ui/timeline-animation";
-import { ArrowRight, PencilLine } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import { useRef } from "react";
 import HoverTranslateTwo from "@/app/destacado/interactive-card-stack";
 import Image from "next/image";
+import { FooterSimple } from "@/components/regular/footer";
+import { Navbar10 } from "@/components/ui/shadcn-io/navbar-10";
+
+
 
 const Feature1 = () => {
   const featuresRef = useRef<HTMLDivElement>(null);
@@ -38,15 +42,17 @@ const Feature1 = () => {
     }),
   };
 
-  // Chat message variants
+  // Animated content variants used in cards
   const messageVariants = {
-    hidden: { x: -20, opacity: 0 },
+    hidden: { y: 16, opacity: 0 },
     visible: (i: number) => ({
-      x: 0,
+      y: 0,
       opacity: 1,
       transition: {
-        delay: 3.2 + i * 0.6,
+        delay: 0.4 + i * 0.2,
         duration: 0.5,
+        type: "spring",
+        stiffness: 120,
       },
     }),
   };
@@ -55,6 +61,51 @@ const Feature1 = () => {
     orange: "before:bg-orange-500 shadow-orange-500/20",
     blue: "before:bg-blue-500 shadow-blue-500/20",
   };
+  const hungerPrograms: Array<{
+    title: string;
+    desc: string;
+    color: keyof typeof colorClasses;
+    rotation: number;
+    logo?: string;
+  }> = [
+    {
+      title: "Comedores solidarios",
+      desc: "Servimos desayunos y almuerzos nutritivos a 480 estudiantes cada semana.",
+      color: "green",
+      rotation: 0,
+      logo: "/hambre-cero-logo.png",
+    },
+    {
+      title: "Huerta escolar",
+      desc: "Cada curso cultiva hortalizas que abastecen el programa Hambre Cero.",
+      color: "orange",
+      rotation: 3,
+    },
+    {
+      title: "Voluntariado familiar",
+      desc: "Más de 80 familias colaboran en la logística y entrega de alimentos.",
+      color: "blue",
+      rotation: -1,
+    },
+  ];
+
+  const roboticsSchedule: Array<{ time: string; title: string; desc: string }> = [
+    {
+      time: "07:30",
+      title: "Apertura del laboratorio",
+      desc: "Equipos preparan estaciones STEAM y calibran impresoras 3D.",
+    },
+    {
+      time: "10:15",
+      title: "Sesión de prototipado",
+      desc: "Estudiantes diseñan soluciones para desafíos de energías renovables.",
+    },
+    {
+      time: "15:00",
+      title: "Demostraciones comunitarias",
+      desc: "Los proyectos se presentan a docentes y familias invitadas.",
+    },
+  ];
 
   return (
     <section className="max-w-7xl mx-auto p-4" ref={featuresRef}>
@@ -158,10 +209,10 @@ const Feature1 = () => {
               animate={{ scale: 1 }}
               transition={{ delay: 2.8, duration: 0.3, type: "spring" }}
             >
-              10M+ {/*TODO: Put school educational context in here*/}
+              1.3K+
             </motion.h1>
-            <p className="text-sm">
-              Used by millions of teams and professionals
+            <p className="text-sm text-gray-700">
+              Estudiantes forman parte de nuestros proyectos académicos y de impacto social.
             </p>
           </motion.div>
         </TimelineContent>
@@ -180,15 +231,7 @@ const Feature1 = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1.6, duration: 0.5 }}
           >
-            {/*TODO: MOVE THE LOGO FROM ICON TO THE CARD OF HAMBRE CERO*/}
-            <Image
-              src="/hambre-cero-logo.png"
-              alt="Hambre Cero Logo"
-              width={80}
-              height={80}
-              className="object-contain"
-            />
-            <h1 className="text-4xl font-semibold">Hambre Cero</h1>
+            <h1 className="text-4xl font-semibold">Programa Hambre Cero</h1>
           </motion.div>
           <motion.p
             className="text-sm"
@@ -196,32 +239,13 @@ const Feature1 = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1.8, duration: 0.5 }}
           >
-            Generate revenue by creating memberships
+            Acompañamos la alimentación escolar con iniciativas integrales impulsadas por la comunidad educativa.
           </motion.p>
           <div className="space-y-2 mt-6">
-            {[
-              {
-                title: "Monthly",
-                desc: "$19 per month, unlimited",
-                color: "green",
-                rotation: 0,
-              },
-              {
-                title: "Trial",
-                desc: "Free for 30 days",
-                color: "orange",
-                rotation: 3,
-              },
-              {
-                title: "Yearly",
-                desc: "$100 per year, unlimited",
-                color: "blue",
-                rotation: -1,
-              },
-            ].map((item, i) => (
+            {hungerPrograms.map((item, i) => (
               <motion.div
-                key={i}
-                className={`flex gap-2 justify-between items-center bg-neutral-50 p-2 rounded-xl border border-neutral-200 shadow-lg pl-7 relative before:content-[''] before:absolute before:left-2.5 before:rounded-md before:top-1.5 before:w-1.5 before:h-[80%] ${colorClasses[item.color as keyof typeof colorClasses]} group-hover:rotate-0 transition-all`}
+                key={item.title}
+                className={`flex gap-4 justify-between items-start bg-neutral-50 p-3 rounded-xl border border-neutral-200 shadow-lg pl-7 relative before:content-[''] before:absolute before:left-2.5 before:rounded-md before:top-1.5 before:w-1.5 before:h-[80%] ${colorClasses[item.color]} group-hover:rotate-0 transition-all`}
                 style={{
                   rotate: `${item.rotation}deg`,
                   boxShadow: `0 10px 15px -3px rgb(${item.color === "green" ? "34 197 94" : item.color === "orange" ? "249 115 22" : "59 130 246"} / 0.1)`,
@@ -236,9 +260,22 @@ const Feature1 = () => {
                 }}
                 whileHover={{ rotate: 0 }}
               >
-                <div>
-                  <h3 className="font-semibold">{item.title}</h3>
-                  <p className="text-sm">{item.desc}</p>
+                <div className="flex items-start gap-3">
+                  {item.logo && (
+                    <span className="flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-200 bg-white p-2">
+                      <Image
+                        src={item.logo}
+                        alt="Logotipo del programa Hambre Cero"
+                        width={40}
+                        height={40}
+                        className="h-full w-full object-contain"
+                      />
+                    </span>
+                  )}
+                  <div>
+                    <h3 className="font-semibold text-gray-900">{item.title}</h3>
+                    <p className="text-sm text-gray-600">{item.desc}</p>
+                  </div>
                 </div>
                 <ArrowRight />
               </motion.div>
@@ -257,7 +294,6 @@ const Feature1 = () => {
             <h3 className="px-1 pt-1 text-black text-2xl font-medium">
               Feria Científica FECIMAR
             </h3>
-            {/*TODO: MOVE THE LOGO FROM ICON TO THE CARD OF Feria CIENTIFICA leaving the title to be only text*/}
             <div className="relative w-full h-48 my-4 rounded-lg overflow-hidden">
               <Image
                 src="/destacado-evento.JPG"
@@ -265,10 +301,22 @@ const Feature1 = () => {
                 fill
                 className="object-cover"
               />
+              <div className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 text-gray-800 shadow-md backdrop-blur">
+                <Image
+                  src="/logo-mcalesti.svg"
+                  alt="Escudo del Colegio Mariscal Estigarribia"
+                  width={36}
+                  height={36}
+                  className="h-8 w-auto"
+                />
+                <span className="text-xs font-semibold uppercase tracking-wide">
+                  Colegio Mcal. Estigarribia
+                </span>
+              </div>
             </div>
             <p className="mt-1 px-1 pb-1 font-normal text-gray-600 text-sm w-full">
-              This component displays an interactive stack of cards with smooth
-              hover animations, gradients, and blur effects.
+              La feria reúne proyectos científicos, tecnológicos y humanísticos
+              desarrollados por estudiantes de todos los ciclos durante el año lectivo.
             </p>
           </article>
           <motion.svg
@@ -389,7 +437,6 @@ const Feature1 = () => {
           </motion.svg>
         </TimelineContent>
 
-        {/* TODO: Put another school activity that's relevant and replace it with the Time Chat */}
         <TimelineContent
           as="div"
           animationNum={4}
@@ -398,83 +445,57 @@ const Feature1 = () => {
           className="lg:col-span-5 sm:col-span-6 col-span-12 relative border p-4 rounded-xl overflow-hidden border-neutral-200"
         >
           <div className="flex w-full max-w-md flex-col overflow-hidden rounded-xl bg-white shadow-lg">
-            {/* Messages Area */}
-            <div className="flex-1 space-y-4 p-4 overflow-hidden">
-              {/* Agent Messages with staggered animation */}
+            <div className="relative h-40 bg-gradient-to-br from-[#1d4ed8] via-[#2563eb] to-[#38bdf8]">
               <motion.div
-                className="mr-auto relative max-w-[80%] rounded-lg bg-gray-100 p-3 text-gray-800"
-                variants={messageVariants}
-                initial="hidden"
-                animate="visible"
-                custom={0}
+                className="absolute inset-0 opacity-30"
+                initial={{ scale: 1.05 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.4, duration: 0.8 }}
               >
-                Hey Rachel, thanks for reaching out! I see that your last
-                transaction was a dining purchase, which qualifies for 5x
-                points, but only for Platinum Status Tier members.
+                <div className="absolute -left-12 top-10 h-32 w-32 rounded-full bg-white/20 blur-3xl" />
+                <div className="absolute bottom-6 -right-8 h-24 w-24 rounded-full bg-white/30 blur-3xl" />
               </motion.div>
-
-              <motion.div
-                className="mr-auto relative max-w-[80%] rounded-lg bg-gray-100 p-3 text-gray-800"
-                variants={messageVariants}
-                initial="hidden"
-                animate="visible"
-                custom={1}
-              >
-                You are currently in the{" "}
-                <span className="font-semibold text-blue-500 border-b border-dashed border-blue-500">
-                  Gold Status Tier
+              <div className="relative flex h-full flex-col justify-end gap-2 p-6 text-white">
+                <span className="text-xs uppercase tracking-[0.3em]">
+                  STEAM
                 </span>
-                , which means you currently earn 3x points on dining
-                transactions.
-                <motion.button
-                  className="absolute -bottom-2 right-0 flex items-center gap-1 rounded-full bg-orange-500 px-2 py-1 text-xs text-white shadow-sm hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
-                  initial={{ scale: 0, rotate: 180 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  transition={{ delay: 4.6, duration: 0.4, type: "spring" }}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <PencilLine className="h-3 w-3" />
-                  Adjust tone
-                </motion.button>
-              </motion.div>
+                <h4 className="text-xl font-semibold leading-tight">
+                  Laboratorio de Innovación Educativa
+                </h4>
+                <p className="text-sm text-blue-100">
+                  Estudiantes diseñan prototipos y soluciones reales cada semana.
+                </p>
+              </div>
             </div>
-
-            {/* Chat Input Area */}
-            <motion.div
-              className="flex items-center gap-2 border-t border-gray-200 p-4"
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 4.8, duration: 0.5 }}
-            >
-              <motion.input
-                type="text"
-                placeholder="Ok, how do I get to the next tier?"
-                className="flex-1 rounded-lg border border-gray-300 bg-gray-100 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                initial={{ width: "60%" }}
-                animate={{ width: "100%" }}
-                transition={{ delay: 5.0, duration: 0.6 }}
-              />
-              <motion.button
-                className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-600 text-white hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
-                initial={{ scale: 0, rotate: 180 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{ delay: 5.2, duration: 0.4, type: "spring" }}
-                whileHover={{ scale: 1.1, rotate: 10 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <ArrowRight className="h-5 w-5" />
-              </motion.button>
-            </motion.div>
+            <div className="space-y-3 p-4">
+              {roboticsSchedule.map((item, index) => (
+                <motion.div
+                  key={item.title}
+                  className="flex items-start gap-3 rounded-lg border border-neutral-200 bg-neutral-50/60 p-3"
+                  variants={messageVariants}
+                  initial="hidden"
+                  animate="visible"
+                  custom={index}
+                >
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
+                    {item.time}
+                  </span>
+                  <div className="space-y-1">
+                    <h5 className="text-sm font-semibold text-gray-900">{item.title}</h5>
+                    <p className="text-sm text-gray-600">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
 
           <article className="absolute right-0 top-0 left-0 w-full bg-linear-to-b from-white via-white to-transparent p-6 pb-[100px]">
             <h3 className="px-1 pt-1 text-black text-2xl font-medium">
-              Real Time Chat
+              Laboratorio STEAM
             </h3>
             <p className="mt-1 px-1 pb-1 font-normal text-gray-600 text-sm w-full">
-              This component displays an interactive stack of cards with smooth
-              hover animations, gradients, and blur effects.
+              Fomentamos el pensamiento científico con talleres de robótica,
+              programación y diseño sustentable abiertos a todos los cursos.
             </p>
           </article>
         </TimelineContent>
@@ -483,4 +504,14 @@ const Feature1 = () => {
   );
 };
 
-export default Feature1;
+const DestacadoPage = () => (
+  <div className="flex min-h-screen flex-col bg-background">
+    <Navbar10 />
+    <main className="flex-1">
+      <Feature1 />
+    </main>
+    <FooterSimple />
+  </div>
+);
+
+export default DestacadoPage;
