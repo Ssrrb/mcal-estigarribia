@@ -158,7 +158,7 @@ const Feature1 = () => {
               animate={{ scale: 1 }}
               transition={{ delay: 2.8, duration: 0.3, type: "spring" }}
             >
-              10M+
+              10M+ {/*TODO: Put school educational context in here*/}
             </motion.h1>
             <p className="text-sm">
               Used by millions of teams and professionals
@@ -180,6 +180,7 @@ const Feature1 = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1.6, duration: 0.5 }}
           >
+            {/*TODO: MOVE THE LOGO FROM ICON TO THE CARD OF HAMBRE CERO*/}
             <Image
               src="/hambre-cero-logo.png"
               alt="Hambre Cero Logo"
@@ -256,6 +257,7 @@ const Feature1 = () => {
             <h3 className="px-1 pt-1 text-black text-2xl font-medium">
               Feria Científica FECIMAR
             </h3>
+            {/*TODO: MOVE THE LOGO FROM ICON TO THE CARD OF Feria CIENTIFICA leaving the title to be only text*/}
             <div className="relative w-full h-48 my-4 rounded-lg overflow-hidden">
               <Image
                 src="/destacado-evento.JPG"
@@ -387,7 +389,7 @@ const Feature1 = () => {
           </motion.svg>
         </TimelineContent>
 
-        {/* Real Time Chat */}
+        {/* TODO: Put another school activity that's relevant and replace it with the Time Chat */}
         <TimelineContent
           as="div"
           animationNum={4}

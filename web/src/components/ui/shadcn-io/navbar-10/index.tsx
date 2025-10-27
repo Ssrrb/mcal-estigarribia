@@ -3,6 +3,8 @@
 import * as React from 'react';
 import { useEffect, useState, useRef } from 'react';
 import { HouseIcon, InboxIcon, SparklesIcon, ZapIcon, UserIcon, ChevronDownIcon } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import {
   NavigationMenu,
@@ -26,36 +28,23 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import type { ComponentProps } from 'react';
-import { siteNavigationLinks } from '@/lib/constant';
+import { siteNavigationLinks } from '@/components/landing/constants';
+
+type LogoProps = Omit<ComponentProps<typeof Image>, 'src'>;
 
 // Simple logo component for the navbar
-const Logo = (props: React.SVGAttributes<SVGElement>) => {
-  return (
-    <svg width='1em' height='1em' viewBox='0 0 324 323' fill='currentColor' xmlns='logo-mcalesti.svg' {...props}>
-      <rect
-        x='88.1023'
-        y='144.792'
-        width='151.802'
-        height='36.5788'
-        rx='18.2894'
-        transform='rotate(-38.5799 88.1023 144.792)'
-        fill='currentColor'
-      />
-      <rect
-        x='85.3459'
-        y='244.537'
-        width='151.802'
-        height='36.5788'
-        rx='18.2894'
-        transform='rotate(-38.5799 85.3459 244.537)'
-        fill='currentColor'
-      />
-    </svg>
-  );
-};
+const Logo = ({ className, alt = 'Colegio Mariscal Estigarribia', priority = true, ...props }: LogoProps) => (
+  <Image
+    src="/logo-mcalesti.svg"
+    alt= "Colegio Mariscal Estigarribia"
+    width={160}
+    height={138}
+    priority={priority}
+    className={cn('h-10 w-auto', className)}
+    {...props}
+  />
+);
 
-// Hamburger icon component replace with the local one: public/logo-mcalesti.svg
-//TODO: ADD the correct routes of the page
 const HamburgerIcon = ({ className, ...props }: React.SVGAttributes<SVGElement>) => (
   <svg
     className={cn('pointer-events-none', className)}
@@ -67,7 +56,7 @@ const HamburgerIcon = ({ className, ...props }: React.SVGAttributes<SVGElement>)
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    xmlns="logo-mcalesti.svg"
+    xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
     <path
@@ -124,7 +113,7 @@ export const Navbar10 = React.forwardRef<HTMLElement, Navbar10Props>(
     {
       className,
       logo = <Logo />,
-      logoHref = '#',
+      logoHref = '/',
       navigationLinks = defaultNavigationLinks,
       upgradeText = 'Upgrade',
       userName = 'John Doe',
@@ -174,7 +163,7 @@ export const Navbar10 = React.forwardRef<HTMLElement, Navbar10Props>(
       <header
         ref={combinedRef}
         className={cn(
-          'sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4 md:px-6 [&_*]:no-underline',
+          'sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 px-4 md:px-6 **:no-underline',
           className
         )}
         {...props}
@@ -199,25 +188,27 @@ export const Navbar10 = React.forwardRef<HTMLElement, Navbar10Props>(
                     <NavigationMenuList className="flex-col items-start gap-0">
                       {navigationLinks.map((link, index) => {
                         const Icon = link.icon;
+                        const linkHref = link.href ?? '#';
                         return (
                           <NavigationMenuItem key={index} className="w-full">
-                            <button
-                              onClick={(e) => {
-                                e.preventDefault();
-                                if (onNavItemClick && link.href) onNavItemClick(link.href);
-                              }}
-                              className={cn(
-                                'flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground cursor-pointer no-underline',
-                                link.active && 'bg-accent text-accent-foreground'
-                              )}
-                            >
-                              <Icon
-                                size={16}
-                                className="text-muted-foreground/80"
-                                aria-hidden={true}
-                              />
-                              <span>{link.label}</span>
-                            </button>
+                            <NavigationMenuLink asChild>
+                              <Link
+                                href={linkHref}
+                                onClick={() => onNavItemClick?.(linkHref)}
+                                className={cn(
+                                  'flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground cursor-pointer no-underline',
+                                  link.active && 'bg-accent text-accent-foreground'
+                                )}
+                                aria-current={link.active ? 'page' : undefined}
+                              >
+                                <Icon
+                                  size={16}
+                                  className="text-muted-foreground/80"
+                                  aria-hidden={true}
+                                />
+                                <span>{link.label}</span>
+                              </Link>
+                            </NavigationMenuLink>
                           </NavigationMenuItem>
                         );
                       })}
@@ -232,26 +223,27 @@ export const Navbar10 = React.forwardRef<HTMLElement, Navbar10Props>(
                 <NavigationMenuList className="gap-2">
                   {navigationLinks.map((link, index) => {
                     const Icon = link.icon;
+                    const linkHref = link.href ?? '#';
                     return (
                       <NavigationMenuItem key={index}>
-                        <NavigationMenuLink
-                          href={link.href}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            if (onNavItemClick && link.href) onNavItemClick(link.href);
-                          }}
-                          className={cn(
-                            'text-foreground hover:text-primary flex items-center gap-2 py-1.5 font-medium transition-colors cursor-pointer group inline-flex h-10 w-max justify-center rounded-md bg-background px-4 py-2 text-sm focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50',
-                            link.active && 'text-primary'
-                          )}
-                          data-active={link.active}
-                        >
-                          <Icon
-                            size={16}
-                            className="text-muted-foreground/80"
-                            aria-hidden={true}
-                          />
-                          <span>{link.label}</span>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            href={linkHref}
+                            onClick={() => onNavItemClick?.(linkHref)}
+                            className={cn(
+                              'text-foreground hover:text-primary flex items-center gap-2 py-1.5 font-medium transition-colors cursor-pointer group inline-flex h-10 w-max justify-center rounded-md bg-background px-4 py-2 text-sm focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50',
+                              link.active && 'text-primary'
+                            )}
+                            data-active={link.active}
+                            aria-current={link.active ? 'page' : undefined}
+                          >
+                            <Icon
+                              size={16}
+                              className="text-muted-foreground/80"
+                              aria-hidden={true}
+                            />
+                            <span>{link.label}</span>
+                          </Link>
                         </NavigationMenuLink>
                       </NavigationMenuItem>
                     );
@@ -263,34 +255,17 @@ export const Navbar10 = React.forwardRef<HTMLElement, Navbar10Props>(
 
           {/* Middle side: Logo */}
           <div className="flex items-center">
-            <button
-              onClick={(e) => e.preventDefault()}
+            <Link
+              href={logoHref}
               className="text-primary hover:text-primary/90 transition-colors cursor-pointer"
+              aria-label="Ir a la página principal"
             >
               {logo}
-            </button>
+            </Link>
           </div>
 
           {/* Right side: Actions */}
-          <div className="flex flex-1 items-center justify-end gap-4">
-            {/* Upgrade button */}
-            <Button 
-              size="sm" 
-              className="text-sm"
-              onClick={(e) => {
-                e.preventDefault();
-                if (onUpgradeClick) onUpgradeClick();
-              }}
-            >
-              <SparklesIcon
-                className="opacity-60 mr-1"
-                size={16}
-                aria-hidden={true}
-              />
-              <span className="hidden sm:inline">{upgradeText}</span>
-              <span className="sm:hidden sr-only">{upgradeText}</span>
-            </Button>
-          </div>
+          <div className="flex flex-1 items-center justify-end gap-4"></div>
         </div>
       </header>
     );

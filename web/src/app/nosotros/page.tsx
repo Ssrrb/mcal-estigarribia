@@ -2,9 +2,9 @@
 
 import * as React from 'react';
 import { Navbar10 } from '@/components/ui/shadcn-io/navbar-10';
-import { Target, Eye, BookOpen, Award, CheckCircle, Users, School, Lightbulb, HandHeart } from 'lucide-react';
+import { Target, Eye, BookOpen, Heart, Scale, ShieldCheck, Handshake, Feather, Sparkles, School } from 'lucide-react';
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
+import {FooterSimple} from '@/components/regular/footer' //TODO: ADD the footer
 
 export default function NosotrosPage() {
   return (
@@ -67,7 +67,7 @@ export default function NosotrosPage() {
                   <div className="flex flex-col gap-1">
                     <h3 className="text-card-foreground text-base font-bold leading-tight">Misión</h3>
                     <p className="text-muted-foreground text-sm font-normal leading-normal">
-                      Formar ciudadanos íntegros, críticos y competentes, a través de una educación de calidad que promueva el desarrollo de habilidades, conocimientos y valores para enfrentar los desafíos de una sociedad globalizada y en constante cambio.
+                      Forjar y consolidar la formación integral de la persona humana, cuya morada son la dignidad y la libertad, al servicio de una convivencia armónica y democrática orientada hacia el bien común mediante la participación solidaria y eficiente de toda la comunidad educativa.
                     </p>
                   </div>
                 </div>
@@ -80,7 +80,7 @@ export default function NosotrosPage() {
                   <div className="flex flex-col gap-1">
                     <h3 className="text-card-foreground text-base font-bold leading-tight">Visión</h3>
                     <p className="text-muted-foreground text-sm font-normal leading-normal">
-                      Ser una institución educativa líder, reconocida por su excelencia académica, innovación pedagógica y compromiso con el desarrollo integral de sus estudiantes, consolidándonos como un referente de transformación social en la comunidad.
+                      Proyectarnos e insertarnos en la comunidad con dinamismo e identidad propia, ofreciendo servicios educativos de calidad y promoviendo jóvenes con sólida formación humana, cristiana y personal que se conviertan en agentes de cambios positivos en la sociedad carapegüeña.
                     </p>
                   </div>
                 </div>
@@ -99,7 +99,16 @@ export default function NosotrosPage() {
                       <BookOpen className="h-8 w-8" />
                     </div>
                     <p className="text-muted-foreground text-sm font-normal leading-normal">
-                      Fundada en 1952, la Escuela Nacional José Félix Estigarribia nació con el compromiso de ofrecer una educación de vanguardia a la comunidad. A lo largo de las décadas, hemos crecido y evolucionado, superando desafíos y celebrando innumerables logros. Desde la inauguración de nuestro primer laboratorio de ciencias en 1975 hasta la implementación de nuestro programa de bilingüismo en 2010, cada hito ha reafirmado nuestra dedicación a la excelencia. Hoy, honramos nuestro pasado mientras miramos con entusiasmo hacia un futuro de innovación y oportunidades para nuestros estudiantes.
+                      Una rica historia de lucha, amor por la educación y esperanza en el pueblo enmarca la vida del Colegio Nacional E.M.D. Mariscal José Félix Estigarribia, institución nacida para responder a las necesidades de la comunidad carapegüeña.
+                    </p>
+                    <p className="text-muted-foreground text-sm font-normal leading-normal">
+                      Tras la habilitación del nuevo local de la Escuela República de Nicaragua en 1927, en 1929 se creó la Escuela Media N.º 1939. En 1940, ante el fallecimiento del Mariscal José Félix Estigarribia, la comunidad solicitó adoptar su nombre, consolidándose como Escuela Superior Mariscal Estigarribia en 1941. El edificio propio fue inaugurado el 22 de junio de 1946, convirtiéndose desde entonces en un verdadero pedestal de la educación regional.
+                    </p>
+                    <p className="text-muted-foreground text-sm font-normal leading-normal">
+                      El crecimiento continuó con la habilitación de la Escuela Normal de Maestros en 1953, su oficialización en 1955 y la posterior denominación de Escuela Normal N.º 15 de Profesores en 1959. Desde 1973 la institución apostó por bachilleratos científicos y técnicos, incorporando propuestas como Contabilidad, Informática, Asistencia Deportiva y Diseño Gráfico, además de fortalecer la infraestructura con laboratorios especializados.
+                    </p>
+                    <p className="text-muted-foreground text-sm font-normal leading-normal">
+                      Hoy, con oferta en los tres turnos y en todos los niveles del tercer ciclo y la educación media, el colegio sigue destacándose por sus proyectos, ferias científicas y participación comunitaria, proyectando al estudiantado a nivel regional, nacional e internacional.
                     </p>
                   </div>
                   <div className="md:w-1/3">
@@ -119,69 +128,80 @@ export default function NosotrosPage() {
                 Valores Institucionales
               </h2>
               <div className="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {/* Excelencia */}
+                {/* Amor */}
                 <div className="flex flex-col gap-3 rounded-xl border border-border bg-card p-6">
                   <div className="text-primary">
-                    <Award className="h-6 w-6" />
+                    <Heart className="h-6 w-6" />
                   </div>
-                  <h3 className="text-card-foreground text-base font-bold leading-tight">Excelencia</h3>
+                  <h3 className="text-card-foreground text-base font-bold leading-tight">Amor</h3>
                   <p className="text-muted-foreground text-sm font-normal leading-normal">
-                    Buscamos la más alta calidad en todo lo que hacemos, fomentando la superación continua.
+                    Promovemos el amor en un mundo que muchas veces se muestra egoísta e indiferente.
                   </p>
                 </div>
 
-                {/* Integridad */}
+                {/* Justicia */}
                 <div className="flex flex-col gap-3 rounded-xl border border-border bg-card p-6">
                   <div className="text-primary">
-                    <CheckCircle className="h-6 w-6" />
+                    <Scale className="h-6 w-6" />
                   </div>
-                  <h3 className="text-card-foreground text-base font-bold leading-tight">Integridad</h3>
+                  <h3 className="text-card-foreground text-base font-bold leading-tight">Justicia</h3>
                   <p className="text-muted-foreground text-sm font-normal leading-normal">
-                    Actuamos con honestidad, transparencia y ética en todas nuestras interacciones.
+                    Defendemos la justicia frente a las diversas formas de injusticia y exclusión.
                   </p>
                 </div>
 
-                {/* Respeto */}
-                <div className="flex flex-col gap-3 rounded-xl border border-border bg-card p-6">
-                  <div className="text-primary">
-                    <HandHeart className="h-6 w-6" />
-                  </div>
-                  <h3 className="text-card-foreground text-base font-bold leading-tight">Respeto</h3>
-                  <p className="text-muted-foreground text-sm font-normal leading-normal">
-                    Valoramos la diversidad de ideas y personas, promoviendo un ambiente de inclusión.
-                  </p>
-                </div>
-
-                {/* Compromiso */}
-                <div className="flex flex-col gap-3 rounded-xl border border-border bg-card p-6">
-                  <div className="text-primary">
-                    <Users className="h-6 w-6" />
-                  </div>
-                  <h3 className="text-card-foreground text-base font-bold leading-tight">Compromiso</h3>
-                  <p className="text-muted-foreground text-sm font-normal leading-normal">
-                    Nos dedicamos al éxito de nuestros estudiantes y al bienestar de nuestra comunidad.
-                  </p>
-                </div>
-
-                {/* Liderazgo */}
+                {/* Paz */}
                 <div className="flex flex-col gap-3 rounded-xl border border-border bg-card p-6">
                   <div className="text-primary">
                     <School className="h-6 w-6" />
                   </div>
-                  <h3 className="text-card-foreground text-base font-bold leading-tight">Liderazgo</h3>
+                  <h3 className="text-card-foreground text-base font-bold leading-tight">Paz</h3>
                   <p className="text-muted-foreground text-sm font-normal leading-normal">
-                    Inspiramos y capacitamos a nuestros estudiantes para que sean líderes positivos.
+                    Construimos la paz como respuesta a la violencia y a los conflictos cotidianos.
                   </p>
                 </div>
 
-                {/* Innovación */}
+                {/* Honestidad */}
                 <div className="flex flex-col gap-3 rounded-xl border border-border bg-card p-6">
                   <div className="text-primary">
-                    <Lightbulb className="h-6 w-6" />
+                    <ShieldCheck className="h-6 w-6" />
                   </div>
-                  <h3 className="text-card-foreground text-base font-bold leading-tight">Innovación</h3>
+                  <h3 className="text-card-foreground text-base font-bold leading-tight">Honestidad</h3>
                   <p className="text-muted-foreground text-sm font-normal leading-normal">
-                    Fomentamos la creatividad y la adaptación a nuevas metodologías de enseñanza.
+                    Sostenemos la honestidad frente a la corrupción y cualquier falta de transparencia.
+                  </p>
+                </div>
+
+                {/* Solidaridad */}
+                <div className="flex flex-col gap-3 rounded-xl border border-border bg-card p-6">
+                  <div className="text-primary">
+                    <Handshake className="h-6 w-6" />
+                  </div>
+                  <h3 className="text-card-foreground text-base font-bold leading-tight">Solidaridad</h3>
+                  <p className="text-muted-foreground text-sm font-normal leading-normal">
+                    Fomentamos la solidaridad en oposición al individualismo y la competencia.
+                  </p>
+                </div>
+
+                {/* Sobriedad */}
+                <div className="flex flex-col gap-3 rounded-xl border border-border bg-card p-6">
+                  <div className="text-primary">
+                    <Feather className="h-6 w-6" />
+                  </div>
+                  <h3 className="text-card-foreground text-base font-bold leading-tight">Sobriedad</h3>
+                  <p className="text-muted-foreground text-sm font-normal leading-normal">
+                    Vivimos la sobriedad como alternativa a una sociedad sustentada en el consumismo.
+                  </p>
+                </div>
+
+                {/* Contemplación y gratuidad */}
+                <div className="flex flex-col gap-3 rounded-xl border border-border bg-card p-6">
+                  <div className="text-primary">
+                    <Sparkles className="h-6 w-6" />
+                  </div>
+                  <h3 className="text-card-foreground text-base font-bold leading-tight">Contemplación y gratuidad</h3>
+                  <p className="text-muted-foreground text-sm font-normal leading-normal">
+                    Cultivamos la contemplación y la gratuidad frente al pragmatismo y al utilitarismo.
                   </p>
                 </div>
               </div>
