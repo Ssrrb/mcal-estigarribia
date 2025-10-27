@@ -103,7 +103,7 @@ export const Navbar10 = React.forwardRef<HTMLElement, Navbar10Props>(
   (
     {
       className,
-      logo = <Logo />,
+      logo = <Logo alt="Colegio Mariscal Estigarribia" />,
       logoHref = '/',
       navigationLinks = defaultNavigationLinks,
       upgradeText = 'Upgrade',

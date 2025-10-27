@@ -60,48 +60,57 @@ export function Header({ timelineRef, revealVariants }: HeaderProps) {
         </nav>
       ) : (
         <Drawer.Root direction="left" open={isOpen} onOpenChange={setIsOpen}>
-          <Drawer.Trigger className="px-2 text-white h-9 grid place-content-center bg-neutral-800 w-fit rounded-lg">
-            <AlignJustify />
+          <Drawer.Trigger className="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/20 bg-white/10 text-white/90 shadow-[0_1px_0_rgba(255,255,255,0.15)_inset] backdrop-blur-md transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent">
+            <span className="sr-only">Abrir menú de navegación</span>
+            <AlignJustify className="h-5 w-5" />
           </Drawer.Trigger>
           <Drawer.Portal>
-            <Drawer.Overlay className="fixed inset-0 bg-black/40 z-50" />
+            <Drawer.Overlay className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm" />
             <Drawer.Content
-              className="left-2 top-2 bottom-2 fixed z-50 outline-none w-72 flex"
+              className="fixed left-3 top-3 bottom-3 z-50 flex w-[min(20rem,calc(100%-1.5rem))] outline-none"
               style={drawerStyle}
             >
-              <div className="bg-gradient-to-t from-black via-neutral-800 to-neutral-950 border border-neutral-700 text-white p-2 h-full w-full grow flex flex-col rounded-[16px]">
-                <div className="w-full flex justify-between">
-                  <div className="flex gap-2 px-4 flex-shrink-0 items-center text-2xl font-semibold">
+              <div className="flex h-full w-full grow flex-col rounded-[22px] border border-white/15 bg-white/10 p-4 text-white shadow-[0_0_1px_rgba(255,255,255,0.4)_inset,0_16px_60px_-20px_rgba(15,23,42,0.6)] backdrop-blur-2xl">
+                <div className="flex items-center justify-between gap-4 rounded-xl border border-white/5 bg-white/5 px-4 py-3 shadow-inner">
+                  <Drawer.Title className="flex items-center gap-3 text-base font-semibold text-white">
                     <Image
                       src="/logo-mcalesti.svg"
                       alt="Logotipo del Colegio Mariscal Estigarribia"
                       width={655}
                       height={567}
                       sizes={LOGO_SIZES}
-                      className="w-20 h-auto sm:w-24 md:w-28 lg:w-32 xl:w-36"
+                      className="w-16 h-auto"
                     />
-                  </div>
-                  <button
-                    className="rounded-md w-fit bg-neutral-800 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
-                    onClick={() => setIsOpen(false)}
+                    <span className="hidden text-sm font-medium uppercase tracking-[0.2em] sm:inline">
+                      Navegación
+                    </span>
+                  </Drawer.Title>
+                  <Drawer.Close
+                    className="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/20 bg-white/10 text-white/90 transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                    aria-label="Cerrar menú de navegación"
                   >
-                    <X />
-                  </button>
+                    <X className="h-4 w-4" />
+                  </Drawer.Close>
                 </div>
-                <div className="rounded-b-md py-2 px-3">
-                  <ul className="space-y-2">
+                <Drawer.Description className="sr-only">
+                  Enlaces de navegación principal del sitio.
+                </Drawer.Description>
+                <nav className="mt-6 grow overflow-y-auto">
+                  <ul className="space-y-1.5">
                     {siteNavigationLinks.map((link) => (
-                      <li
-                        key={link.href}
-                        className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md"
-                      >
-                        <a href={link.href} className="block w-full">
-                          {link.label}
-                        </a>
+                      <li key={link.href}>
+                        <Drawer.Close asChild>
+                          <a
+                            href={link.href}
+                            className="flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-base font-medium text-white/95 transition hover:border-white/30 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                          >
+                            {link.label}
+                          </a>
+                        </Drawer.Close>
                       </li>
                     ))}
                   </ul>
-                </div>
+                </nav>
               </div>
             </Drawer.Content>
           </Drawer.Portal>
