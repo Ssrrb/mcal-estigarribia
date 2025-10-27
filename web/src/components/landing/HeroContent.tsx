@@ -2,6 +2,7 @@
 
 import { TimelineContent } from "@/components/ui/timeline-animation";
 import { RefObject } from "react";
+import Link from "next/link";
 
 interface HeroContentProps {
   timelineRef: RefObject<HTMLDivElement>;
@@ -42,11 +43,12 @@ export function HeroContent({ timelineRef, revealVariants }: HeroContentProps) {
 
       {/* CTA Button */}
       <TimelineContent
-        as="button"
+        as={Link}
+        href="/destacado"
         animationNum={3}
         timelineRef={timelineRef}
         customVariants={revealVariants}
-        className="bg-white text-black px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-100 transition-colors duration-200 shadow-lg"
+        className="bg-white text-black px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-100 transition-colors duration-200 shadow-lg inline-block"
       >
         Averiguar más
       </TimelineContent>

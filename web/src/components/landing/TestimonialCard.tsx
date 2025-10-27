@@ -1,11 +1,9 @@
 "use client";
 
-import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
 import { LiquidGlassCard } from "@/components/ui/liquid-glass";
 import { TimelineContent } from "@/components/ui/timeline-animation";
+import Image from "next/image";
 import { RefObject } from "react";
-import { people } from "./constants";
-
 interface TestimonialCardProps {
   timelineRef: RefObject<HTMLDivElement>;
   opacityVariants: {
@@ -41,10 +39,16 @@ export function TestimonialCard({
         blurIntensity="sm"
         className="p-4 ml-auto sm:w-md w-full"
       >
-        {/* Avatar Stack */}
-        <div className="flex items-center gap-10 mb-6">
-          <div className="flex flex-row items-center justify-start">
-            <AnimatedTooltip items={people} />
+        {/* Paraguay Flag */}
+        <div className="flex items-center gap-4 mb-6">
+          <div className="flex-shrink-0">
+            <Image
+              src="/Flag_of_Paraguay.svg"
+              alt="Bandera de Paraguay"
+              width={48}
+              height={32}
+              className="rounded-sm shadow-md"
+            />
           </div>
           <span className="text-white font-medium text-sm">
             Confiado y Respaldado por el Gobierno del Paraguay

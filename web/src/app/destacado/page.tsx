@@ -1,6 +1,14 @@
 "use client";
 import { TimelineContent } from "@/components/ui/timeline-animation";
-import { ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  Cpu,
+  FlaskConical,
+  Medal,
+  Palette,
+  type LucideIcon,
+} from "lucide-react";
 import { motion } from "motion/react";
 import { useRef } from "react";
 import HoverTranslateTwo from "@/app/destacado/interactive-card-stack";
@@ -43,70 +51,60 @@ const Feature1 = () => {
   };
 
   // Animated content variants used in cards
-  const messageVariants = {
-    hidden: { y: 16, opacity: 0 },
-    visible: (i: number) => ({
-      y: 0,
-      opacity: 1,
-      transition: {
-        delay: 0.4 + i * 0.2,
-        duration: 0.5,
-        type: "spring",
-        stiffness: 120,
-      },
-    }),
-  };
   const colorClasses = {
     green: "before:bg-green-500 shadow-green-500/20",
     orange: "before:bg-orange-500 shadow-orange-500/20",
     blue: "before:bg-blue-500 shadow-blue-500/20",
+    pink: "before:bg-pink-500 shadow-pink-500/20",
+  };
+  const accentShadows: Record<keyof typeof colorClasses, string> = {
+    green: "0 10px 15px -3px rgb(34 197 94 / 0.1)",
+    orange: "0 10px 15px -3px rgb(249 115 22 / 0.1)",
+    blue: "0 10px 15px -3px rgb(59 130 246 / 0.1)",
+    pink: "0 10px 15px -3px rgb(244 114 182 / 0.12)",
+  };
+  const accentIconColor: Record<keyof typeof colorClasses, string> = {
+    green: "text-emerald-500",
+    orange: "text-orange-500",
+    blue: "text-blue-500",
+    pink: "text-pink-500",
   };
   const hungerPrograms: Array<{
     title: string;
     desc: string;
     color: keyof typeof colorClasses;
     rotation: number;
-    logo?: string;
+    icon: LucideIcon;
   }> = [
     {
-      title: "Comedores solidarios",
-      desc: "Servimos desayunos y almuerzos nutritivos a 480 estudiantes cada semana.",
+      title: "Laboratorio de Informática",
+      desc: "Integración de alfabetización digital y robótica para todos los ciclos.",
       color: "green",
       rotation: 0,
-      logo: "/hambre-cero-logo.png",
+      icon: Cpu,
     },
     {
-      title: "Huerta escolar",
-      desc: "Cada curso cultiva hortalizas que abastecen el programa Hambre Cero.",
+      title: "Taller de Diseño Gráfico",
+      desc: "La creatividad se conecta con proyectos reales para la comunidad.",
       color: "orange",
       rotation: 3,
+      icon: Palette,
     },
     {
-      title: "Voluntariado familiar",
-      desc: "Más de 80 familias colaboran en la logística y entrega de alimentos.",
+      title: "Laboratorio de Ciencias",
+      desc: "Experiencias experimentales guiadas con enfoque STEAM y sostenibilidad.",
       color: "blue",
       rotation: -1,
+      icon: FlaskConical,
+    },
+    {
+      title: "Asistencia Deportiva",
+      desc: "Formación física y acompañamiento nutricional para equipos escolares.",
+      color: "pink",
+      rotation: -1,
+      icon: Medal,
     },
   ];
-
-  const roboticsSchedule: Array<{ time: string; title: string; desc: string }> = [
-    {
-      time: "07:30",
-      title: "Apertura del laboratorio",
-      desc: "Equipos preparan estaciones STEAM y calibran impresoras 3D.",
-    },
-    {
-      time: "10:15",
-      title: "Sesión de prototipado",
-      desc: "Estudiantes diseñan soluciones para desafíos de energías renovables.",
-    },
-    {
-      time: "15:00",
-      title: "Demostraciones comunitarias",
-      desc: "Los proyectos se presentan a docentes y familias invitadas.",
-    },
-  ];
-
   return (
     <section className="max-w-7xl mx-auto p-4" ref={featuresRef}>
       <article className="max-w-5xl mx-auto py-10 text-center space-y-2 px-8">
@@ -117,8 +115,8 @@ const Feature1 = () => {
           customVariants={revealVariants}
           className="md:text-5xl sm:text-4xl text-3xl font-medium"
         >
-          Seamlessly Integrated, <br />
-          Powerful Features
+          Programas que transforman <br />
+          la experiencia estudiantil
         </TimelineContent>
         <TimelineContent
           as="p"
@@ -127,9 +125,8 @@ const Feature1 = () => {
           customVariants={revealVariants}
           className="text-gray-600 sm:text-base text-sm sm:w-[70%] w-full mx-auto"
         >
-          Discover the tools that elevate your experience—AI-powered insights,
-          real-time user states, flexible memberships, instant chat, and
-          intuitive visual reporting.
+          Acompañamos el aprendizaje con ciencia, arte, deporte y solidaridad
+          para que cada estudiante descubra su vocación y proyecte impacto en la comunidad.
         </TimelineContent>
       </article>
       <div className="grid grid-cols-12 gap-4">
@@ -146,11 +143,10 @@ const Feature1 = () => {
 
           <article className="absolute right-0 bottom-0 left-0 w-full bg-linear-to-t from-white via-white to-transparent p-6 pt-[100px]">
             <h3 className="px-1 pt-1 text-black text-2xl font-medium">
-              Interactive Card Stack
+              Actividades
             </h3>
             <p className="mt-1 px-1 pb-1 font-normal text-gray-600 text-sm w-full">
-              This component displays an interactive stack of cards with smooth
-              hover animations, gradients, and blur effects.
+              Contamos con varias actividades destacadas durante el año.
             </p>
           </article>
         </TimelineContent>
@@ -209,7 +205,7 @@ const Feature1 = () => {
               animate={{ scale: 1 }}
               transition={{ delay: 2.8, duration: 0.3, type: "spring" }}
             >
-              1.3K+
+              1.5K+
             </motion.h1>
             <p className="text-sm text-gray-700">
               Estudiantes forman parte de nuestros proyectos académicos y de impacto social.
@@ -231,7 +227,7 @@ const Feature1 = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1.6, duration: 0.5 }}
           >
-            <h1 className="text-4xl font-semibold">Programa Hambre Cero</h1>
+            <h1 className="text-4xl font-semibold">Talleres</h1>
           </motion.div>
           <motion.p
             className="text-sm"
@@ -239,47 +235,42 @@ const Feature1 = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1.8, duration: 0.5 }}
           >
-            Acompañamos la alimentación escolar con iniciativas integrales impulsadas por la comunidad educativa.
+            Acompañamos la educación escolar con talleres impulsados por la comunidad educativa.
           </motion.p>
           <div className="space-y-2 mt-6">
-            {hungerPrograms.map((item, i) => (
-              <motion.div
-                key={item.title}
-                className={`flex gap-4 justify-between items-start bg-neutral-50 p-3 rounded-xl border border-neutral-200 shadow-lg pl-7 relative before:content-[''] before:absolute before:left-2.5 before:rounded-md before:top-1.5 before:w-1.5 before:h-[80%] ${colorClasses[item.color]} group-hover:rotate-0 transition-all`}
-                style={{
-                  rotate: `${item.rotation}deg`,
-                  boxShadow: `0 10px 15px -3px rgb(${item.color === "green" ? "34 197 94" : item.color === "orange" ? "249 115 22" : "59 130 246"} / 0.1)`,
-                }}
-                initial={{ x: -30, opacity: 0, rotate: item.rotation + 10 }}
-                animate={{ x: 0, opacity: 1, rotate: item.rotation }}
-                transition={{
-                  delay: i * 0.2,
-                  duration: 0.6,
-                  type: "spring",
-                  stiffness: 100,
-                }}
-                whileHover={{ rotate: 0 }}
-              >
-                <div className="flex items-start gap-3">
-                  {item.logo && (
-                    <span className="flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-200 bg-white p-2">
-                      <Image
-                        src={item.logo}
-                        alt="Logotipo del programa Hambre Cero"
-                        width={40}
-                        height={40}
-                        className="h-full w-full object-contain"
-                      />
+            {hungerPrograms.map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={item.title}
+                  className={`flex gap-4 justify-between items-start bg-neutral-50 p-3 rounded-xl border border-neutral-200 shadow-lg pl-7 relative before:content-[''] before:absolute before:left-2.5 before:rounded-md before:top-1.5 before:w-1.5 before:h-[80%] ${colorClasses[item.color]} group-hover:rotate-0 transition-all`}
+                  style={{
+                    rotate: `${item.rotation}deg`,
+                    boxShadow: accentShadows[item.color],
+                  }}
+                  initial={{ x: -30, opacity: 0, rotate: item.rotation + 10 }}
+                  animate={{ x: 0, opacity: 1, rotate: item.rotation }}
+                  transition={{
+                    delay: i * 0.2,
+                    duration: 0.6,
+                    type: "spring",
+                    stiffness: 100,
+                  }}
+                  whileHover={{ rotate: 0 }}
+                >
+                  <div className="flex items-start gap-3">
+                    <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-neutral-200 bg-white ${accentIconColor[item.color]}`}>
+                      <Icon className="h-6 w-6" strokeWidth={1.75} />
                     </span>
-                  )}
-                  <div>
-                    <h3 className="font-semibold text-gray-900">{item.title}</h3>
-                    <p className="text-sm text-gray-600">{item.desc}</p>
+                    <div>
+                      <h3 className="font-semibold text-gray-900">{item.title}</h3>
+                      <p className="text-sm text-gray-600">{item.desc}</p>
+                    </div>
                   </div>
-                </div>
-                <ArrowRight />
-              </motion.div>
-            ))}
+                  <ArrowRight className="text-gray-400" />
+                </motion.div>
+              );
+            })}
           </div>
         </TimelineContent>
 
@@ -315,8 +306,7 @@ const Feature1 = () => {
               </div>
             </div>
             <p className="mt-1 px-1 pb-1 font-normal text-gray-600 text-sm w-full">
-              La feria reúne proyectos científicos, tecnológicos y humanísticos
-              desarrollados por estudiantes de todos los ciclos durante el año lectivo.
+            La institución es sede del encuentro de alumnos/as e investigadores en diferentes áreas de las ciencias dentro del evento propiciado con la Feria denominada FECIMAR declarado de interés municipal, Departamental y ministerial por el Ministro de Educación Luis Ramírez.
             </p>
           </article>
           <motion.svg
@@ -444,60 +434,43 @@ const Feature1 = () => {
           customVariants={revealVariants}
           className="lg:col-span-5 sm:col-span-6 col-span-12 relative border p-4 rounded-xl overflow-hidden border-neutral-200"
         >
-          <div className="flex w-full max-w-md flex-col overflow-hidden rounded-xl bg-white shadow-lg">
-            <div className="relative h-40 bg-gradient-to-br from-[#1d4ed8] via-[#2563eb] to-[#38bdf8]">
-              <motion.div
-                className="absolute inset-0 opacity-30"
-                initial={{ scale: 1.05 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.4, duration: 0.8 }}
-              >
-                <div className="absolute -left-12 top-10 h-32 w-32 rounded-full bg-white/20 blur-3xl" />
-                <div className="absolute bottom-6 -right-8 h-24 w-24 rounded-full bg-white/30 blur-3xl" />
-              </motion.div>
-              <div className="relative flex h-full flex-col justify-end gap-2 p-6 text-white">
-                <span className="text-xs uppercase tracking-[0.3em]">
-                  STEAM
-                </span>
-                <h4 className="text-xl font-semibold leading-tight">
-                  Laboratorio de Innovación Educativa
-                </h4>
-                <p className="text-sm text-blue-100">
-                  Estudiantes diseñan prototipos y soluciones reales cada semana.
-                </p>
+          <div className="flex h-full flex-col justify-between gap-6">
+            <article className="space-y-3">
+              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+                MEC
+              </span>
+              <h3 className="text-2xl font-semibold text-gray-900">
+                Programa Hambre Cero
+              </h3>
+              <p className="text-sm text-gray-600">
+                Gracias al apoyo del gobierno se garantiza la provisión de alimentos para los alumnos durante los tres turnos.
+              </p>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li className="flex items-start gap-2">
+                  <Check className="mt-0.5 h-4 w-4 text-primary" strokeWidth={2.2} />
+                  <span>Salud y nutrición para estudiantes de todos los turnos.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="mt-0.5 h-4 w-4 text-primary" strokeWidth={2.2} />
+                  <span>Educación nutricional: Se promueve la alimentación nutritiva</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="mt-0.5 h-4 w-4 text-primary" strokeWidth={2.2} />
+                  <span>Se distribuyen los alimentos para todos los estudiantes</span>
+                </li>
+              </ul>
+            </article>
+            <div className="relative overflow-hidden rounded-lg border border-neutral-200 bg-neutral-50 shadow-inner">
+              <div className="relative aspect-[4/3] w-full">
+                <Image
+                  src="/hambre-cero-logo.png"
+                  alt="Programa Hambre Cero en el Colegio Mariscal Estigarribia"
+                  fill
+                  className="object-contain p-6"
+                />
               </div>
             </div>
-            <div className="space-y-3 p-4">
-              {roboticsSchedule.map((item, index) => (
-                <motion.div
-                  key={item.title}
-                  className="flex items-start gap-3 rounded-lg border border-neutral-200 bg-neutral-50/60 p-3"
-                  variants={messageVariants}
-                  initial="hidden"
-                  animate="visible"
-                  custom={index}
-                >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
-                    {item.time}
-                  </span>
-                  <div className="space-y-1">
-                    <h5 className="text-sm font-semibold text-gray-900">{item.title}</h5>
-                    <p className="text-sm text-gray-600">{item.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
           </div>
-
-          <article className="absolute right-0 top-0 left-0 w-full bg-linear-to-b from-white via-white to-transparent p-6 pb-[100px]">
-            <h3 className="px-1 pt-1 text-black text-2xl font-medium">
-              Laboratorio STEAM
-            </h3>
-            <p className="mt-1 px-1 pb-1 font-normal text-gray-600 text-sm w-full">
-              Fomentamos el pensamiento científico con talleres de robótica,
-              programación y diseño sustentable abiertos a todos los cursos.
-            </p>
-          </article>
         </TimelineContent>
       </div>
     </section>

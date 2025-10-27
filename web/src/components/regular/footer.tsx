@@ -1,8 +1,11 @@
 "use client"
 
+import Image from "next/image"
 import { motion } from "motion/react"
 
 interface FooterSimpleProps {
+  logoSrc?: string
+  logoAlt?: string
   companyName?: string
   description?: string
   links?: {
@@ -20,8 +23,10 @@ interface FooterSimpleProps {
 }
 
 export function FooterSimple({
-  companyName = "Colegio Nacional Mcal. Estigarribia",
-  description = "Forjando líderes para el futuro, basados en la dignidad, libertad y el bien común.",
+  logoSrc = "/logo-mcalesti.svg",
+  logoAlt = "Colegio Nacional Mcal. Estigarribia",
+  companyName,
+  description,
   links = {
     product: [
       { name: "Nosotros", url: "/nosotros" },
@@ -32,7 +37,7 @@ export function FooterSimple({
     company: [
       { name: "Historia", url: "/institucion#historia" },
       { name: "Misión y Visión", url: "/institucion#mision-vision" },
-      { name: "Directivos", url: "/institucion#directivos" },
+      { name: "Directivos", url: "/nosotros" },
     ],
     support: [
       { name: "Contacto", url: "#" },
@@ -41,8 +46,8 @@ export function FooterSimple({
     ],
   },
   social = {
-    facebook: "#",
-    instagram: "#",
+    facebook: "https://www.facebook.com/p/Colegio-Nacional-EMD-Mcal-Estigarribia-100057266896916/?locale=es_LA",
+    instagram: "https://www.instagram.com/explore/locations/1863384993989835/colegio-nac-emd-mcal-jose-f-estigarribia-carapegua/",
   },
   copyright = `© ${new Date().getFullYear()} Colegio Mcal. Estigarribia. Todos los derechos reservados.`,
 }: FooterSimpleProps) {
@@ -64,13 +69,31 @@ export function FooterSimple({
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-foreground mb-4 text-2xl font-bold">
-                {companyName}
-              </h3>
-              <p className="text-foreground/70 mb-6 max-w-md text-sm">
-                {description}
-              </p>
-              
+              {logoSrc ? (
+                <div className="mb-6">
+                  <Image
+                    src={logoSrc}
+                    alt={logoAlt}
+                    width={200}
+                    height={80}
+                    className="h-16 w-auto object-contain"
+                  />
+                </div>
+              ) : (
+                <>
+                  {companyName && (
+                    <h3 className="text-foreground mb-4 text-2xl font-bold">
+                      {companyName}
+                    </h3>
+                  )}
+                  {description && (
+                    <p className="text-foreground/70 mb-6 max-w-md text-sm">
+                      {description}
+                    </p>
+                  )}
+                </>
+              )}
+
               {/* Social Links */}
               <div className="flex gap-4">
                 {social.facebook && (
@@ -200,5 +223,3 @@ export function FooterSimple({
     </footer>
   )
 }
-
-

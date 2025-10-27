@@ -1,18 +1,26 @@
 import { type HTMLMotionProps, motion, useInView } from "motion/react";
-import type React from "react";
+import {
+  useMemo,
+  type ComponentPropsWithoutRef,
+  type ElementType,
+  type ReactNode,
+  type RefObject,
+} from "react";
 import type { Variants } from "motion/react";
 
-type TimelineContentProps<T extends keyof HTMLElementTagNameMap> = {
-  children?: React.ReactNode;
+type TimelineContentProps<T extends ElementType> = {
+  children?: ReactNode;
   animationNum: number;
   className?: string;
-  timelineRef: React.RefObject<HTMLElement | null>;
+  timelineRef: RefObject<HTMLElement | null>;
   as?: T;
   customVariants?: Variants;
   once?: boolean;
-} & HTMLMotionProps<T>;
+} & (T extends keyof HTMLElementTagNameMap
+  ? HTMLMotionProps<T>
+  : ComponentPropsWithoutRef<T>);
 
-export const TimelineContent = <T extends keyof HTMLElementTagNameMap = "div">({
+export const TimelineContent = <T extends ElementType = "div">({
   children,
   animationNum,
   timelineRef,
@@ -46,7 +54,15 @@ export const TimelineContent = <T extends keyof HTMLElementTagNameMap = "div">({
     once,
   });
 
-  const MotionComponent = motion[as || "div"] as React.ElementType;
+  const Component = (as || "div") as ElementType;
+
+  const MotionComponent = useMemo(() => {
+    if (typeof Component === "string") {
+      return motion[Component as keyof typeof motion] as ElementType;
+    }
+
+    return motion.create(Component) as ElementType;
+  }, [Component]);
 
   return (
     <MotionComponent

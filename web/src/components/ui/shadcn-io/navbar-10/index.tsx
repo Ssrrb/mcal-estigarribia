@@ -2,7 +2,8 @@
 
 import * as React from 'react';
 import { useEffect, useState, useRef } from 'react';
-import { HouseIcon, InboxIcon, SparklesIcon, ZapIcon, UserIcon, ChevronDownIcon } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import { HouseIcon, InboxIcon, ZapIcon, UserIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -17,26 +18,17 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import type { ComponentProps } from 'react';
 import { siteNavigationLinks } from '@/components/landing/constants';
 
-type LogoProps = Omit<ComponentProps<typeof Image>, 'src'>;
+type LogoProps = Omit<ComponentProps<typeof Image>, 'src'> & { alt?: string };
 
 // Simple logo component for the navbar
 const Logo = ({ className, alt = 'Colegio Mariscal Estigarribia', priority = true, ...props }: LogoProps) => (
   <Image
     src="/logo-mcalesti.svg"
-    alt= "Colegio Mariscal Estigarribia"
+    alt={alt}
     width={160}
     height={138}
     priority={priority}
@@ -104,7 +96,6 @@ const defaultNavigationLinks: Navbar10NavItem[] = siteNavigationLinks.map((link,
   return {
     ...link,
     icon: IconComponent,
-    active: index === 0,
   };
 });
 
@@ -128,6 +119,21 @@ export const Navbar10 = React.forwardRef<HTMLElement, Navbar10Props>(
   ) => {
     const [isMobile, setIsMobile] = useState(false);
     const containerRef = useRef<HTMLElement>(null);
+    const pathname = usePathname();
+
+    const resolvedNavigationLinks = React.useMemo(() => {
+      return navigationLinks.map((link) => {
+        const linkHref = link.href ?? '#';
+        const isMatch =
+          linkHref !== '#' &&
+          (pathname === linkHref || (linkHref !== '/' && pathname.startsWith(`${linkHref}/`)));
+
+        return {
+          ...link,
+          active: link.active ?? isMatch,
+        };
+      });
+    }, [navigationLinks, pathname]);
 
     useEffect(() => {
       const checkWidth = () => {
@@ -186,7 +192,7 @@ export const Navbar10 = React.forwardRef<HTMLElement, Navbar10Props>(
                 <PopoverContent align="start" className="w-64 p-1">
                   <NavigationMenu className="max-w-none">
                     <NavigationMenuList className="flex-col items-start gap-0">
-                      {navigationLinks.map((link, index) => {
+                      {resolvedNavigationLinks.map((link, index) => {
                         const Icon = link.icon;
                         const linkHref = link.href ?? '#';
                         return (
@@ -221,7 +227,7 @@ export const Navbar10 = React.forwardRef<HTMLElement, Navbar10Props>(
             {!isMobile && (
               <NavigationMenu className="flex">
                 <NavigationMenuList className="gap-2">
-                  {navigationLinks.map((link, index) => {
+                  {resolvedNavigationLinks.map((link, index) => {
                     const Icon = link.icon;
                     const linkHref = link.href ?? '#';
                     return (

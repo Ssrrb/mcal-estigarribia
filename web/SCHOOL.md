@@ -199,4 +199,4 @@ También se destaca por los proyectos que realiza durante el año lectivo a trav
 
 * Implementación del Programa Hambre Cero ( MEC)  en los tres turnos 
 
-La Institución cuenta con Talleres  de laboratorio de Informática, de Ciencias   Básicas, de Diseño Gráfico y de Asistencia Deportiva .
+La Institución cuenta con Talleres  de laboratorio de Informática, de Ciencias Básicas, de Diseño Gráfico y de Asistencia Deportiva .

@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { Navbar10 } from '@/components/ui/shadcn-io/navbar-10';
-import {FooterSimple} from '@/components/regular/footer' //TODO: ADD the footer
+import {FooterSimple} from '@/components/regular/footer' 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import {
   Accordion,
@@ -310,6 +310,7 @@ export default function AcademicoPage() {
             </Tabs>
           </div>
         </div>
+      <FooterSimple/>
       </main>
     </div>
   );

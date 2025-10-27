@@ -3,7 +3,6 @@
 import { TimelineContent } from "@/components/ui/timeline-animation";
 import VerticalCutReveal from "@/components/ui/vertical-cut-reveal";
 import { RefObject } from "react";
-
 interface HeroSectionProps {
   timelineRef: RefObject<HTMLDivElement>;
   revealVariants: {
@@ -38,6 +37,9 @@ export function HeroSection({ timelineRef, revealVariants }: HeroSectionProps) {
         <span className="relative flex size-4">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-500 opacity-75"></span>
           <span className="relative inline-flex size-4 rounded-full bg-blue-600"></span>
+        </span>
+        <span className="text-sm sm:text-base text-gray-100">
+          615 estudiantes acompañados por 148 docentes comprometidos
         </span>
       </TimelineContent>
 

@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import { TimelineContent } from "@/components/ui/timeline-animation";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { AlignJustify, Send, X } from "lucide-react";
+import { AlignJustify, X } from "lucide-react";
 import { Drawer } from "vaul";
 import type { Variants } from "motion/react";
 import { CSSProperties, RefObject, useState } from "react";
@@ -57,14 +57,6 @@ export function Header({ timelineRef, revealVariants }: HeaderProps) {
               ))}
             </div>
           </div>
-
-          <div className="flex items-center space-x-4">
-            <div className="bg-blue-500 p-2 text-white rounded-full">
-            </div>
-            <button className="bg-gradient-to-t from-blue-500 to-blue-600 text-white backdrop-blur-sm border border-blue-500 shadow-md shadow-blue-600 px-6 py-2 rounded-full hover:bg-blue-600 transition-all duration-200">
-              Llamar
-            </button>
-          </div>
         </nav>
       ) : (
         <Drawer.Root direction="left" open={isOpen} onOpenChange={setIsOpen}>
@@ -109,14 +101,6 @@ export function Header({ timelineRef, revealVariants }: HeaderProps) {
                       </li>
                     ))}
                   </ul>
-                  <div className="flex items-center space-x-4 pt-4">
-                    <div className="bg-blue-500 p-2 text-white rounded-full">
-                      <Send className="w-5 h-5" />
-                    </div>
-                    <button className="bg-gradient-to-t from-blue-500 to-blue-600 text-white backdrop-blur-sm border border-blue-500 shadow-md shadow-blue-600 px-6 py-2 rounded-full hover:bg-blue-600 transition-all duration-200">
-                      Llamar
-                    </button>
-                  </div>
                 </div>
               </div>
             </Drawer.Content>

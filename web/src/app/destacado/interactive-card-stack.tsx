@@ -1,60 +1,32 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 const cards = [
-  // copy not visible
   {
     id: 1,
-    logo: "/openai-white.svg",
-    name: "Grok 3",
-    contextWindow: "128k",
+    logo: "/logo-mcalesti.svg",
+    name: "Torneo de Colores",
+    categoria: "Deportes",
   },
-  // copy not visible
   {
     id: 2,
-    logo: "/anthropic-white.svg",
-    name: "Grok 3",
-    contextWindow: "128k",
+    logo: "/window.svg",
+    name: "Campamento BTI",
+    categoria: "Integración",
   },
   {
     id: 3,
-    logo: "/grok-white.svg",
-    name: "Grok 3 Mini Beta",
-    contextWindow: "131k",
+    logo: "/Flag_of_Paraguay.svg",
+    name: "Olimpiadas Especiales",
+    categoria: "Inclusión",
   },
   {
     id: 4,
-    logo: "/openai-white.svg",
-    name: "GPT 4.5 Preview",
-    contextWindow: "128k",
-  },
-  {
-    id: 5,
-    logo: "/anthropic-white.svg",
-    name: "Grok 3",
-    contextWindow: "128k",
-  },
-  // copy not visible
-  {
-    id: 6,
-    logo: "/grok-white.svg",
-    name: "Grok 3",
-    contextWindow: "128k",
-  },
-  // copy not visible
-  {
-    id: 7,
-    logo: "/openai-white.svg",
-    name: "Grok 3",
-    contextWindow: "128k",
-  },
-  // copy not visible
-  {
-    id: 8,
-    logo: "/anthropic-white.svg",
-    name: "Grok 3",
-    contextWindow: "128k",
+    logo: "/hambre-cero-logo.png",
+    name: "La magia de la pintura",
+    categoria: "Arte",
   },
 ];
 
@@ -62,17 +34,14 @@ const CARD_HEIGHT = 70; // px, adjust to match your h-16 + gap
 
 function HoverTranslateTwo() {
   const [active, setActive] = useState(2); // Start with the middle card
-  const [hovered, setHovered] = useState(false);
 
   // on hover, move to next card (if possible)
   const handleMouseEnter = () => {
-    setHovered(true);
     if (active < cards.length - 1) setActive(active + 1);
   };
 
   // on leave, return to previous card
   const handleMouseLeave = () => {
-    setHovered(false);
     if (active > 0) setActive(active - 1);
   };
 
@@ -106,7 +75,7 @@ function HoverTranslateTwo() {
                   transition duration-300 ease-in-out 
                   ${
                     isCenter
-                      ? "scale-[1.00] blur-none z-[99"
+                      ? "scale-[1.00] blur-none z-[99]"
                       : "scale-95 blur-[2px] opacity-60"
                   }
                 `}
@@ -135,18 +104,19 @@ function HoverTranslateTwo() {
                 <div className="w-full">
                   <div className="flex items-center gap-3 w-full justify-between pr-2 pl-1">
                     <div className="flex items-center gap-2">
-                      <img
+                      <Image
                         src={card.logo}
                         alt={card.name}
-                        width={20}
-                        height={20}
+                        width={32}
+                        height={32}
+                        className="h-8 w-8 rounded-md object-contain"
                       />
                       <span className="text-white font-medium -ml-0.5">
                         {card.name}
                       </span>
                     </div>
                     <span className="text-white font-medium">
-                      {card.contextWindow} Context
+                      {card.categoria}
                     </span>
                   </div>
                 </div>

@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Navbar10 } from '@/components/ui/shadcn-io/navbar-10';
 import { Target, Eye, BookOpen, Heart, Scale, ShieldCheck, Handshake, Feather, Sparkles, School } from 'lucide-react';
 import Link from 'next/link';
-import {FooterSimple} from '@/components/regular/footer' //TODO: ADD the footer
+import {FooterSimple} from '@/components/regular/footer'
 
 export default function NosotrosPage() {
   return (
@@ -115,7 +115,7 @@ export default function NosotrosPage() {
                     <img
                       className="rounded-lg object-cover w-full h-48 md:h-full"
                       alt="Fachada histórica del edificio de la escuela en blanco y negro."
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQEAzCddflqnciawRosZRQAjneAwDhV-prJb6DRtIUeYEV7RGs1yxh4s0aYS3CXW8wqc808DZqFw7kjtvy04gJxN7tX2jExbVGaBtVwbySQn_IfhoJ_KpKqVZG7szdFa8uZs-eLe7lI0ZQz5KHTB3FerhnJz1pjT6XV8OHhBZJheUMlo6CH0K5AhvgtZaxAyTplfQqa18LG_N2IYUAMn4kD7Iz-hcy976TEkcJhvhW67L3fEyUzS1Mejq7SS-yD892j0OijRMq4D4"
+                      src="escuela2.jpeg"
                     />
                   </div>
                 </div>
@@ -208,6 +208,7 @@ export default function NosotrosPage() {
             </section>
           </div>
         </div>
+      <FooterSimple/>
       </main>
     </div>
   );
